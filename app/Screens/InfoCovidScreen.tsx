@@ -30,6 +30,7 @@ const infoCovidScreen: React.FC = () => {
         }
     };
 
+    
     const renderContent = () => {
         switch (activeSection) {
             case 'INFORMACOES_GERAIS':
