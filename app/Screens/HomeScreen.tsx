@@ -68,7 +68,7 @@ const HomeScreen: React.FC = () => {
                             label="REABILITAÇÃO"
                             label2="PÓS-COVID"
                             onPress={() =>
-                                router.push("/Screens/InfoCovidScreen")  
+                                router.push("/Screens/ReabilitacaoScreen")  
                             }
                         />
                         <HomeSelect
