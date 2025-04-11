@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    width: 86,
+    width: 120,
     
   },
   imageContainer: {
@@ -73,6 +73,8 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     lineHeight: 10,
     letterSpacing: 0.1,
+    width: 150,
+    
     
     
   },

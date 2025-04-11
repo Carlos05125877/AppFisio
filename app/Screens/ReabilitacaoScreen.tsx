@@ -1,21 +1,20 @@
 import * as React from "react";
 import { View, Image, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
-import InputField from "../../components/InputField";
 import { useRouter } from "expo-router";
-import Button from "@/components/Button";
-import DividerWithText from "../../components/DividerWithText";
-import GoogleButton from "../../components/GoogleButton";
-import AppleButton from "@/components/AppleButton";
 import ReabilitacaoSelect from "@/components/ReabilitacaoSelect";
+import Header from "@/components/Header";
+import BtPerguntasFrequentes from "@/components/btPerguntasFrequentes"; 
 
 const HomeScreen: React.FC = () => {
     const router = useRouter();
 	return (
         
         <View style={styles.container}>
+            <Header/>
             <View style={styles.content}>
-                <View>
-                    <Text style={styles.title}>REABILTALÇÃO FISIOTERAPÊUTICA</Text>
+                <View style={{ width: 500 }}>
+                    <Text style={styles.titulo}>REABILITAÇÃO FISIOTERAPÊUTICA</Text>
+                    <View style={styles.line}></View>
                 </View>
 
                 <View style={styles.areaDeSelecao}>
@@ -67,7 +66,7 @@ const HomeScreen: React.FC = () => {
                         <ReabilitacaoSelect
                             imageSource={require("../../assets/images/fadigaPos.png")}
                             label="MANEJO DA"
-                            label2="FADIGA PÓS-C"
+                            label2="FADIGA PÓS-COVID"
                             onPress={() =>
                                 router.push("/Screens/InfoCovidScreen")  
                             }
@@ -99,9 +98,13 @@ const HomeScreen: React.FC = () => {
                             }
                         />
                     </View>
-
-                    
                 </View> 
+                    <View style={styles.btStyle}>
+                        <BtPerguntasFrequentes onPress={() =>
+                                router.push("/Screens/InfoCovidScreen")  
+                            }
+                        />
+                    </View>
             </View>
         </View>
         
@@ -115,65 +118,77 @@ const styles = StyleSheet.create({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        paddingTop: 50,
         paddingBottom: 10,
         backgroundColor: "#ffffff",
+        width: "100%",
+        height: "100%",
     },
     content: {
+        marginTop: 20,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        width: 356,
       },
-    title: {
+
+    titulo: {
         marginBottom: 25,
-        color: "#333",
-        fontFamily: "Open Sans",
+        color: "#5B5B5B",
+        fontFamily: "Alumni Sans SC",
         fontSize: 20,
         textAlign: "center",
         justifyContent: "center",
+        fontWeight: 600,
+        lineHeight: 20,
+    },
+    line:{
+        height: 1,
+        backgroundColor: "#5B5B5B80",
     },
     areaDeSelecao: {
         display: "flex",
-        
         flexDirection: "column",
         alignItems: "center",
-        width: 356,
+        width: 390,
         height: 450,
-        marginTop: 20,
-        backgroundColor: "#060606",
+        marginTop: 40,
+        backgroundColor: "#F8F8F8",
         borderRadius: 10,
         
     },
  
     primeiraLinha: {
-        gap:5,
+        
         marginTop: "7%",
-        marginBottom: 20,
+        marginBottom: 10,
         display: "flex",
         flexDirection: "row",
         justifyContent: "flex-start",
-        alignItems: "flex-start",
-        marginLeft: "5%",
+        alignItems: "center",
+        
         
     },
     segundaLinha: {
-        gap:5,
+        marginTop: "7%",
+        marginBottom: 10,
         display: "flex",
         flexDirection: "row",
-        alignItems: "flex-start",
-        marginBottom: 20,
-        marginLeft: "5%",
+        alignItems: "center",
+        
         
     },
     terceiraLinha: {
-        gap:5,
+        marginTop: "7%",
+        marginBottom: 10,
         display: "flex",
         flexDirection: "row",
-        alignItems: "flex-start",
-        marginBottom: 20,
-        marginLeft: "5%",
+        alignItems: "center",
+        
         
     },
+    btStyle: {
+        marginTop: 20,
+        width: "100%",
+    }
+
 });
 export default HomeScreen;

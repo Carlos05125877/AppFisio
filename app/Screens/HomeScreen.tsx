@@ -15,7 +15,7 @@ const HomeScreen: React.FC = () => {
         <View style={styles.container}>
             <View style={styles.content}>
                 <View>
-                    <Text style={styles.title}>Efetue seu login</Text>
+                    <Text style={styles.titulo}>Efetue seu login</Text>
                 </View>
                 <View style={styles.inputContainer}>
                     <InputField 
@@ -28,7 +28,7 @@ const HomeScreen: React.FC = () => {
                     inputType="password"
                     secureTextEntry={true}/>
                 </View>
-                <Button onPress={() => router.push('/Screens/InfoCovidScreen')} title="Acessar" />
+                <Button onPress={() => router.push('/Screens/InfoCovidScreen')} titulo="Acessar" />
 
                 <TouchableOpacity onPress={() => router.push('/Screens/InfoCovidScreen')}>
                     <Text style={styles.esqueciSenhaText}>Esqueci minha senha</Text>
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         width: 302,
       },
-    title: {
+    titulo: {
         marginBottom: 25,
         color: "#333",
         fontFamily: "Open Sans",

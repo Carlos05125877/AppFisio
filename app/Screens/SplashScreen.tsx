@@ -58,7 +58,7 @@ const SplashScreen: React.FC = () => {
                 style={[styles.virusIcon, styles.virusSmallTopRight]}
             />
 
-            <Text style={styles.title}>CORONA{'\n'}             FATOS</Text>
+            <Text style={styles.titulo}>CORONA{'\n'}             FATOS</Text>
         </LinearGradient>
         
     );
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    title: {
+    titulo: {
         color: '#FFFFFF',
         fontSize: 48,
         fontWeight: 'bold',

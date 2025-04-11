@@ -36,8 +36,8 @@ const infoCovidScreen: React.FC = () => {
             case 'INFORMACOES_GERAIS':
                 return (
                     <>
-                        <Text style={styles.title}>Informações Gerais</Text>
-                        <Text style={styles.paragraph}>
+                        <Text style={styles.titulo}>Informações Gerais</Text>
+                        <Text style={styles.pargrafo}>
                             A COVID-19 é uma doença infecciosa causada pelo coronavírus SARS-CoV-2. Os principais sintomas incluem:
                         </Text>
                         <Text style={styles.bulletPoint}>• Febre</Text>
@@ -46,13 +46,13 @@ const infoCovidScreen: React.FC = () => {
                         <Text style={styles.bulletPoint}>• Dores musculares</Text>
                         <Text style={styles.bulletPoint}>• Perda de olfato ou paladar</Text>
                         
-                        <Text style={styles.subtitle}>Transmissão</Text>
-                        <Text style={styles.paragraph}>
+                        <Text style={styles.subtitulo}>Transmissão</Text>
+                        <Text style={styles.pargrafo}>
                             O vírus se espalha principalmente através de gotículas respiratórias quando uma pessoa infectada tosse, espirra ou fala.
                         </Text>
                         
-                        <Text style={styles.subtitle}>Período de Incubação</Text>
-                        <Text style={styles.paragraph}>
+                        <Text style={styles.subtitulo}>Período de Incubação</Text>
+                        <Text style={styles.pargrafo}>
                             O tempo entre a exposição ao vírus e o início dos sintomas pode variar de 1 a 14 dias, sendo em média 5-6 dias.
                         </Text>
                     </>
@@ -60,21 +60,21 @@ const infoCovidScreen: React.FC = () => {
             case 'PREVENCAO_CUIDADOS':
                 return (
                     <>
-                        <Text style={styles.title}>Prevenção e Cuidados</Text>
-                        <Text style={styles.subtitle}>Medidas de Proteção</Text>
+                        <Text style={styles.titulo}>Prevenção e Cuidados</Text>
+                        <Text style={styles.subtitulo}>Medidas de Proteção</Text>
                         <Text style={styles.bulletPoint}>• Use máscara em locais fechados</Text>
                         <Text style={styles.bulletPoint}>• Lave as mãos frequentemente</Text>
                         <Text style={styles.bulletPoint}>• Mantenha distanciamento social</Text>
                         <Text style={styles.bulletPoint}>• Evite aglomerações</Text>
                         <Text style={styles.bulletPoint}>• Mantenha ambientes ventilados</Text>
 
-                        <Text style={styles.subtitle}>Higienização</Text>
-                        <Text style={styles.paragraph}>
+                        <Text style={styles.subtitulo}>Higienização</Text>
+                        <Text style={styles.pargrafo}>
                             Use álcool 70% para higienizar as mãos quando não puder lavá-las. Limpe superfícies frequentemente tocadas.
                         </Text>
 
-                        <Text style={styles.subtitle}>Vacinação</Text>
-                        <Text style={styles.paragraph}>
+                        <Text style={styles.subtitulo}>Vacinação</Text>
+                        <Text style={styles.pargrafo}>
                             Mantenha seu calendário vacinal atualizado. As vacinas são seguras e eficazes na prevenção de casos graves.
                         </Text>
                     </>
@@ -82,24 +82,24 @@ const infoCovidScreen: React.FC = () => {
             case 'EFEITOS_COVID':
                 return (
                     <>
-                        <Text style={styles.title}>Efeitos da COVID no Corpo</Text>
-                        <Text style={styles.subtitle}>Sistema Respiratório</Text>
-                        <Text style={styles.paragraph}>
+                        <Text style={styles.titulo}>Efeitos da COVID no Corpo</Text>
+                        <Text style={styles.subtitulo}>Sistema Respiratório</Text>
+                        <Text style={styles.pargrafo}>
                             O vírus afeta principalmente os pulmões, causando inflamação e dificuldade respiratória.
                         </Text>
 
-                        <Text style={styles.subtitle}>Sistema Cardiovascular</Text>
-                        <Text style={styles.paragraph}>
+                        <Text style={styles.subtitulo}>Sistema Cardiovascular</Text>
+                        <Text style={styles.pargrafo}>
                             Pode causar problemas cardíacos e formação de coágulos sanguíneos.
                         </Text>
 
-                        <Text style={styles.subtitle}>Sistema Nervoso</Text>
-                        <Text style={styles.paragraph}>
+                        <Text style={styles.subtitulo}>Sistema Nervoso</Text>
+                        <Text style={styles.pargrafo}>
                             Alguns pacientes relatam perda de olfato e paladar, além de outros sintomas neurológicos.
                         </Text>
 
-                        <Text style={styles.subtitle}>COVID Longa</Text>
-                        <Text style={styles.paragraph}>
+                        <Text style={styles.subtitulo}>COVID Longa</Text>
+                        <Text style={styles.pargrafo}>
                             Alguns sintomas podem persistir por meses após a infecção inicial.
                         </Text>
                     </>
@@ -107,19 +107,19 @@ const infoCovidScreen: React.FC = () => {
             case 'ATUALIZACOES':
                 return (
                     <>
-                        <Text style={styles.title}>Atualizações e Novidades</Text>
-                        <Text style={styles.subtitle}>Variantes</Text>
-                        <Text style={styles.paragraph}>
+                        <Text style={styles.titulo}>Atualizações e Novidades</Text>
+                        <Text style={styles.subtitulo}>Variantes</Text>
+                        <Text style={styles.pargrafo}>
                             Novas variantes do vírus continuam surgindo e sendo monitoradas pela OMS.
                         </Text>
 
-                        <Text style={styles.subtitle}>Tratamentos</Text>
-                        <Text style={styles.paragraph}>
+                        <Text style={styles.subtitulo}>Tratamentos</Text>
+                        <Text style={styles.pargrafo}>
                             Pesquisas continuam avançando no desenvolvimento de tratamentos mais eficazes.
                         </Text>
 
-                        <Text style={styles.subtitle}>Recomendações</Text>
-                        <Text style={styles.paragraph}>
+                        <Text style={styles.subtitulo}>Recomendações</Text>
+                        <Text style={styles.pargrafo}>
                             As diretrizes de saúde são atualizadas conforme novas evidências científicas surgem.
                         </Text>
                     </>
@@ -127,18 +127,18 @@ const infoCovidScreen: React.FC = () => {
             case 'FAKE_NEWS':
                 return (
                     <>
-                        <Text style={styles.title}>Fake News e Desinformação</Text>
-                        <Text style={styles.subtitle}>Mitos Comuns</Text>
-                        <Text style={styles.paragraph}>
+                        <Text style={styles.titulo}>Fake News e Desinformação</Text>
+                        <Text style={styles.subtitulo}>Mitos Comuns</Text>
+                        <Text style={styles.pargrafo}>
                             É importante verificar informações em fontes confiáveis e não compartilhar conteúdo sem verificação.
                         </Text>
 
-                        <Text style={styles.subtitle}>Fontes Confiáveis</Text>
+                        <Text style={styles.subtitulo}>Fontes Confiáveis</Text>
                         <Text style={styles.bulletPoint}>• Organização Mundial da Saúde (OMS)</Text>
                         <Text style={styles.bulletPoint}>• Ministério da Saúde</Text>
                         <Text style={styles.bulletPoint}>• Instituições de pesquisa reconhecidas</Text>
 
-                        <Text style={styles.subtitle}>Como Identificar Fake News</Text>
+                        <Text style={styles.subtitulo}>Como Identificar Fake News</Text>
                         <Text style={styles.bulletPoint}>• Verifique a fonte da informação</Text>
                         <Text style={styles.bulletPoint}>• Procure por data de publicação</Text>
                         <Text style={styles.bulletPoint}>• Desconfie de conteúdo alarmista</Text>
@@ -147,19 +147,19 @@ const infoCovidScreen: React.FC = () => {
             case 'ARTIGOS':
                 return (
                     <>
-                        <Text style={styles.title}>Artigos Científicos</Text>
-                        <Text style={styles.subtitle}>Artigos Recomendados</Text>
-                        <Text style={styles.paragraph}>
+                        <Text style={styles.titulo}>Artigos Científicos</Text>
+                        <Text style={styles.subtitulo}>Artigos Recomendados</Text>
+                        <Text style={styles.pargrafo}>
                             
                         </Text>
 
-                        <Text style={styles.subtitle}> </Text>
+                        <Text style={styles.subtitulo}> </Text>
                         <Text style={styles.bulletPoint}>• Artigo 1</Text>
                         <Text style={styles.bulletPoint}>• Artigo 2</Text>
                         <Text style={styles.bulletPoint}>• Artigo 3</Text>
 
-                        <Text style={styles.subtitle}></Text>
-                        <Text style={styles.paragraph}>
+                        <Text style={styles.subtitulo}></Text>
+                        <Text style={styles.pargrafo}>
                             
                         </Text>
                     </>
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#012B78",
         borderRadius: 20,
     },
-    title: {
+    titulo: {
         alignItems: "center",
         fontFamily: "Alumni Sans SC",
         textAlign: "center",
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
         color: "#ffffff",
         marginBottom: 20,
     },
-    subtitle: {
+    subtitulo: {
         fontFamily: "Alumni Sans SC",
         fontStyle: "normal",
         fontWeight: "bold",
@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 10,
     },
-    paragraph: {
+    pargrafo: {
         fontFamily: "Alumni Sans SC",
         fontSize: 16,
         lineHeight: 22,
