@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Image, Text, StyleSheet, TouchableOpacity, ScrollView, Animated } from "react-native";
+import { View, Image, Text, StyleSheet, ScrollView, Animated } from "react-native";
 import { useRouter } from "expo-router";
 import { GestureHandlerRootView, PanGestureHandler } from 'react-native-gesture-handler';
 import InfoCovidSelect from "@/components/InfoCovidSelect";
