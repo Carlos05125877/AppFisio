@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "AppFisio",
-    "slug": "AppFisio",
+    "name": "Corona Fatos",
+    "slug": "Corona Fatos",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/fisio.png",
-    "scheme": "myapp",
+    "icon": "./assets/images/logoApp.png",
+    "scheme": "Corona Fatos",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -13,21 +13,21 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/fisio.png",
+        "foregroundImage": "./assets/images/logoApp.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/fisio.png"
+      "favicon": "./assets/images/logoApp.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/fisio.png",
+          "image": "./assets/images/logoApp.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"

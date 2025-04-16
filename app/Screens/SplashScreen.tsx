@@ -22,10 +22,10 @@ const SplashScreen: React.FC = () => {
         >
             {/* Ícones de vírus */}
             <Image
-                source={require('../../assets/images/virus-icon.png')}
+                source={require('../../assets/images/Frame79.png')}
                 style={[styles.virusIcon, styles.virusTopLeft]}
             />
-            <Image
+           {/* <Image
                 source={require('../../assets/images/virus-icon.png')}
                 style={[styles.virusIcon, styles.virusTopRight]}
             />
@@ -59,6 +59,7 @@ const SplashScreen: React.FC = () => {
             />
 
             <Text style={styles.titulo}>CORONA{'\n'}             FATOS</Text>
+           */}
         </LinearGradient>
         
     );
@@ -79,17 +80,18 @@ const styles = StyleSheet.create({
         zIndex: 2,
     },
     virusIcon: {
-        position: 'absolute',
-        width: 60,
-        height: 60,
-        opacity: 0.2,
-        tintColor: '#FFFFFF',
+        //position: 'absolute',
+        //width: 60,
+        //height: 60,
+       // opacity: 0.2,
+       // tintColor: '#FFFFFF',
+       
     },
     virusTopLeft: {
-        top: '10%',
-        left: '10%',
-        width: 80,
-        height: 80,
+       // top: '10%',
+       // left: '10%',
+       // width: 174,
+        //height: 190,
     },
     virusTopRight: {
         top: '5%',
