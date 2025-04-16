@@ -34,7 +34,7 @@ const HomeScreen: React.FC = () => {
                     <Text style={styles.esqueciSenhaText}>Esqueci minha senha</Text>
                 </TouchableOpacity>    
 
-                <TouchableOpacity onPress={() => router.push('/Screens/InfoCovidScreen')}>
+                <TouchableOpacity onPress={() => router.push('/Screens/CadastrarScreen')}>
                     <Text style={styles.cadastrarText}>Cadastrar</Text>
                 </TouchableOpacity>
 
