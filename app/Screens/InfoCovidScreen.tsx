@@ -1,84 +1,42 @@
 import * as React from "react";
-import { View, Image, Text, StyleSheet, ScrollView, Animated } from "react-native";
+import { View, Image, Text, StyleSheet, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
-import { GestureHandlerRootView, PanGestureHandler } from 'react-native-gesture-handler';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import InfoCovidSelect from "@/components/InfoCovidSelect";
+import TituloCovid from "@/components/TituloCovid";
 import Header from "@/components/Header";
 
 const infoCovidScreen: React.FC = () => {
     const router = useRouter();
     const [activeSection, setActiveSection] = React.useState('INFORMACOES_GERAIS');
-    const translateX = new Animated.Value(0);
 
-    const onGestureEvent = Animated.event(
-        [{ nativeEvent: { translationX: translateX } }],
-        { useNativeDriver: true }
-    );
-
-    const onHandlerStateChange = (event: any) => {
-        if (event.nativeEvent.oldState === 4) {
-            const { translationX } = event.nativeEvent;
-            
-            if (translationX > 50) {
-                router.back();
-            } else {
-                Animated.spring(translateX, {
-                    toValue: 0,
-                    useNativeDriver: true,
-                }).start();
-            }
-        }
-    };
-
-    
     const renderContent = () => {
         switch (activeSection) {
             case 'INFORMACOES_GERAIS':
                 return (
                     <>
-                        <Text style={styles.titulo}>Informações Gerais</Text>
-                        <Text style={styles.pargrafo}>
-                            A COVID-19 é uma doença infecciosa causada pelo coronavírus SARS-CoV-2. Os principais sintomas incluem:
-                        </Text>
-                        <Text style={styles.bulletPoint}>• Febre</Text>
-                        <Text style={styles.bulletPoint}>• Tosse seca</Text>
-                        <Text style={styles.bulletPoint}>• Cansaço</Text>
-                        <Text style={styles.bulletPoint}>• Dores musculares</Text>
-                        <Text style={styles.bulletPoint}>• Perda de olfato ou paladar</Text>
-                        
-                        <Text style={styles.subtitulo}>Transmissão</Text>
-                        <Text style={styles.pargrafo}>
-                            O vírus se espalha principalmente através de gotículas respiratórias quando uma pessoa infectada tosse, espirra ou fala.
-                        </Text>
-                        
-                        <Text style={styles.subtitulo}>Período de Incubação</Text>
-                        <Text style={styles.pargrafo}>
-                            O tempo entre a exposição ao vírus e o início dos sintomas pode variar de 1 a 14 dias, sendo em média 5-6 dias.
-                        </Text>
+                        <View style={styles.container}>
+                            <View style={styles.fullWidth}>
+                            </View>
+                            <TituloCovid />
+                            <View style={styles.areaText}>
+                                <Text style={styles.pargrafo}>A COVID-19 é uma doença infecciosa causada pelo coronavírus SARS-CoV-2. Identificado pela primeira vez em dezembro de 2019, na China, o vírus rapidamente se espalhou pelo mundo, levando a Organização Mundial da Saúde (OMS) a declarar estado de pandemia em março de 2020​.</Text>
+                                <Text style={styles.pargrafo}>A transmissão acontece principalmente por meio de gotículas respiratórias expelidas ao falar, tossir ou espirrar, além do contato com superfícies contaminadas​.</Text>
+                            </View>
+                            
+                            <View style={styles.areaText2}>
+                                <Text style={styles.textArea2}>O SARS-CoV-2, integrante do subgênero Sarbecovírus, pertence à família Coronaviridae e é o sétimo coronavírus identificado capaz de infectar seres humanos.</Text>
+                            </View>
+                            <Image
+                                source={require('../../assets/images/covidImage.jpg')}
+                                style={styles.image}
+                            />
+
+                         </View>
+
                     </>
                 );
-            case 'PREVENCAO_CUIDADOS':
-                return (
-                    <>
-                        <Text style={styles.titulo}>Prevenção e Cuidados</Text>
-                        <Text style={styles.subtitulo}>Medidas de Proteção</Text>
-                        <Text style={styles.bulletPoint}>• Use máscara em locais fechados</Text>
-                        <Text style={styles.bulletPoint}>• Lave as mãos frequentemente</Text>
-                        <Text style={styles.bulletPoint}>• Mantenha distanciamento social</Text>
-                        <Text style={styles.bulletPoint}>• Evite aglomerações</Text>
-                        <Text style={styles.bulletPoint}>• Mantenha ambientes ventilados</Text>
-
-                        <Text style={styles.subtitulo}>Higienização</Text>
-                        <Text style={styles.pargrafo}>
-                            Use álcool 70% para higienizar as mãos quando não puder lavá-las. Limpe superfícies frequentemente tocadas.
-                        </Text>
-
-                        <Text style={styles.subtitulo}>Vacinação</Text>
-                        <Text style={styles.pargrafo}>
-                            Mantenha seu calendário vacinal atualizado. As vacinas são seguras e eficazes na prevenção de casos graves.
-                        </Text>
-                    </>
-                );
+           
             case 'EFEITOS_COVID':
                 return (
                     <>
@@ -144,26 +102,7 @@ const infoCovidScreen: React.FC = () => {
                         <Text style={styles.bulletPoint}>• Desconfie de conteúdo alarmista</Text>
                     </>
                 );
-            case 'ARTIGOS':
-                return (
-                    <>
-                        <Text style={styles.titulo}>Artigos Científicos</Text>
-                        <Text style={styles.subtitulo}>Artigos Recomendados</Text>
-                        <Text style={styles.pargrafo}>
-                            
-                        </Text>
-
-                        <Text style={styles.subtitulo}> </Text>
-                        <Text style={styles.bulletPoint}>• Artigo 1</Text>
-                        <Text style={styles.bulletPoint}>• Artigo 2</Text>
-                        <Text style={styles.bulletPoint}>• Artigo 3</Text>
-
-                        <Text style={styles.subtitulo}></Text>
-                        <Text style={styles.pargrafo}>
-                            
-                        </Text>
-                    </>
-                );
+           
             default:
                 return null;
         }
@@ -172,28 +111,18 @@ const infoCovidScreen: React.FC = () => {
     return (
         <GestureHandlerRootView style={styles.mainContainer}>
             <Header />
-            <PanGestureHandler
-                onGestureEvent={onGestureEvent}
-                onHandlerStateChange={onHandlerStateChange}
-            >
-                <Animated.View style={[
-                    styles.container,
-                    {
-                        transform: [{ translateX }]
-                    }
-                ]}>
-                    <View style={styles.content}>
-                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.scroll}>
-                            <InfoCovidSelect onSelect={setActiveSection} activeSection={activeSection} />
+            <View style={styles.container}>
+                <View style={styles.content}>
+                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.scroll}>
+                        <InfoCovidSelect onSelect={setActiveSection} activeSection={activeSection} />
+                    </ScrollView>
+                    <View style={styles.Container}>
+                        <ScrollView>
+                            {renderContent()}
                         </ScrollView>
-                        <View style={styles.areaText}>
-                            <ScrollView>
-                                {renderContent()}
-                            </ScrollView>
-                        </View>
                     </View>
-                </Animated.View>
-            </PanGestureHandler>
+                </View>
+            </View>
         </GestureHandlerRootView>
     );
 }
@@ -205,7 +134,6 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        paddingHorizontal: 20,
         paddingTop: 20,
         paddingBottom: 20,
         backgroundColor: "#ffffff",
@@ -218,16 +146,55 @@ const styles = StyleSheet.create({
     scroll: {
         display: "flex",
     },
-    areaText: {
+    Container: {
         display: "flex",
-        flexDirection: "column",
-        alignItems: "flex-start",
         marginTop: 10,
-        width: 368,
-        height: 668,
+        height: 700,
+
+    
+    },
+    areaText: {
+        marginTop: 10,
+        width: 400,
         padding: 20,
-        backgroundColor: "#012B78",
-        borderRadius: 20,
+        backgroundColor: "#ffffff",
+        marginLeft: "auto",
+        marginRight: "auto",
+    },
+
+    areaText2: {
+        alignItems: "flex-start",
+        justifyContent: "center",
+        width: 300,
+        borderRadius: 10,
+        backgroundColor: "#ffffff",
+        marginLeft: "auto",
+        marginRight: "auto",
+        borderWidth: 1,
+        borderColor: "#000000",
+    },
+    textArea2: {
+        fontFamily: "Alumni Sans SC",
+        fontSize: 13,
+        lineHeight: 20,
+        fontStyle: "normal",
+        fontWeight: 500,
+        color: "#000000A8",
+        marginBottom: 10,
+        textAlign: "center",
+    },
+    image: {
+        width: 229,
+        height: 229,
+        aspectRatio: 1/1,
+        borderRadius: 40,
+        marginTop: 20,
+        marginLeft: "auto",
+        marginRight: "auto",
+    },
+    fullWidth: {
+        width: '100%',
+        alignSelf: 'stretch',
     },
     titulo: {
         alignItems: "center",
@@ -237,7 +204,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 24,
         lineHeight: 33,
-        color: "#ffffff",
+        color: "#000000",
         marginBottom: 20,
     },
     subtitulo: {
@@ -246,7 +213,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 20,
         lineHeight: 28,
-        color: "#ffffff",
+        color: "#000000",
         marginTop: 20,
         marginBottom: 10,
     },
@@ -254,14 +221,14 @@ const styles = StyleSheet.create({
         fontFamily: "Alumni Sans SC",
         fontSize: 16,
         lineHeight: 22,
-        color: "#ffffff",
+        color: "#000000",
         marginBottom: 10,
     },
     bulletPoint: {
         fontFamily: "Alumni Sans SC",
         fontSize: 16,
         lineHeight: 22,
-        color: "#ffffff",
+        color: "#000000",
         marginLeft: 20,
         marginBottom: 5,
     },

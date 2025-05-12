@@ -19,23 +19,16 @@ const InfoCovidSelect: React.FC<InfoCovidSelectProps> = ({ onSelect, activeSecti
         </View>
       </TouchableOpacity>
       <TouchableOpacity 
-        style={[styles.Button, activeSection === 'PREVENCAO_CUIDADOS' && styles.activeButton]}
-        onPress={() => onSelect('PREVENCAO_CUIDADOS')}
+        style={[styles.Button, activeSection === 'SUS_PANDEMIA' && styles.activeButton]}
+        onPress={() => onSelect('SUS_PANDEMIA')}
       >
-        <View>
-          <Text style={styles.ButtonText}>PREVENÇÃO E</Text>
-          <Text style={styles.ButtonText}>CUIDADOS</Text>
+         <View>
+          <Text style={styles.ButtonText}>O SUS NA</Text>
+          <Text style={styles.ButtonText}>PANDEMIA</Text>
         </View>
+
       </TouchableOpacity>
-      <TouchableOpacity 
-        style={[styles.Button, activeSection === 'EFEITOS_COVID' && styles.activeButton]}
-        onPress={() => onSelect('EFEITOS_COVID')}
-      >
-        <View>
-          <Text style={styles.ButtonText}>EFEITOS DA</Text>
-          <Text style={styles.ButtonText}>COVID NO CORPO</Text>
-        </View>
-      </TouchableOpacity>
+      
       <TouchableOpacity 
         style={[styles.Button, activeSection === 'ATUALIZACOES' && styles.activeButton]}
         onPress={() => onSelect('ATUALIZACOES')}
@@ -45,6 +38,7 @@ const InfoCovidSelect: React.FC<InfoCovidSelectProps> = ({ onSelect, activeSecti
           <Text style={styles.ButtonText}>NOVIDADES</Text>
         </View>
       </TouchableOpacity>
+      
       <TouchableOpacity 
         style={[styles.Button, activeSection === 'FAKE_NEWS' && styles.activeButton]}
         onPress={() => onSelect('FAKE_NEWS')}
@@ -55,14 +49,15 @@ const InfoCovidSelect: React.FC<InfoCovidSelectProps> = ({ onSelect, activeSecti
         </View>
       </TouchableOpacity>
       <TouchableOpacity 
-        style={[styles.Button, activeSection === 'ARTIGOS' && styles.activeButton]}
-        onPress={() => onSelect('ARTIGOS')}
+        style={[styles.Button, activeSection === 'TECNOLOGIA' && styles.activeButton]}
+        onPress={() => onSelect('TECNOLOGIA')}
       >
         <View>
-          <Text style={styles.ButtonText}>ARTIGOS</Text>
-          <Text style={styles.ButtonText}>CIENTÍFICOS</Text>
+          <Text style={styles.ButtonText}>TECNOLOGIA E</Text>
+          <Text style={styles.ButtonText}>INOVAÇÃO</Text>
         </View>
       </TouchableOpacity>
+
     </View>
   );
 };
@@ -73,7 +68,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
-    //width: 302,
+    width: "100%",
   },
   Button: {
     display: "flex",

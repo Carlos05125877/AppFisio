@@ -9,8 +9,8 @@ const SplashScreen: React.FC = () => {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            router.replace('/Screens/HomeScreen');
-        }, 7000); // 7 segundos
+            router.replace('/Screens/HomeScreen'); 
+        }, 7000); 
 
         return () => clearTimeout(timer);
     }, []);
