@@ -5,6 +5,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import InfoCovidSelect from "@/components/InfoCovidSelect";
 import TituloCovid from "@/components/TituloCovid";
 import Header from "@/components/Header";
+import DividerWithText from "@/components/DividerWithText";
 
 const infoCovidScreen: React.FC = () => {
     const router = useRouter();
@@ -16,22 +17,69 @@ const infoCovidScreen: React.FC = () => {
                 return (
                     <>
                         <View style={styles.container}>
-                            <View style={styles.fullWidth}>
-                            </View>
                             <TituloCovid />
                             <View style={styles.areaText}>
                                 <Text style={styles.pargrafo}>A COVID-19 é uma doença infecciosa causada pelo coronavírus SARS-CoV-2. Identificado pela primeira vez em dezembro de 2019, na China, o vírus rapidamente se espalhou pelo mundo, levando a Organização Mundial da Saúde (OMS) a declarar estado de pandemia em março de 2020​.</Text>
                                 <Text style={styles.pargrafo}>A transmissão acontece principalmente por meio de gotículas respiratórias expelidas ao falar, tossir ou espirrar, além do contato com superfícies contaminadas​.</Text>
-                            </View>
                             
-                            <View style={styles.areaText2}>
-                                <Text style={styles.textArea2}>O SARS-CoV-2, integrante do subgênero Sarbecovírus, pertence à família Coronaviridae e é o sétimo coronavírus identificado capaz de infectar seres humanos.</Text>
-                            </View>
-                            <Image
-                                source={require('../../assets/images/covidImage.jpg')}
-                                style={styles.image}
-                            />
+                            
+                                <View style={styles.areaText2}>
+                                    <Text style={styles.textArea2}>O SARS-CoV-2, integrante do subgênero Sarbecovírus, pertence à família Coronaviridae e é o sétimo coronavírus identificado capaz de infectar seres humanos.</Text>
+                                </View>
+                            
+                                <Image
+                                    source={require('../../assets/images/covidImage.jpg')}
+                                    style={styles.image}
+                                />
+                            
+                                <DividerWithText text="Sinais e Sintomas" />
+                                <Text style={styles.pargrafo}>
+                                    A COVID-19 pode se manifestar de diferentes formas, desde pessoas sem sintomas até quadros graves que exigem cuidados intensivos. A classificação dos casos se dá conforme a gravidade:
+                                </Text>
+                                <Text style={styles.subtitulo}>
+                                    Casos Assintomáticos
+                                </Text>
+                                <Text style={styles.pargrafo}>
+                                    A pessoa testa positivo para o vírus, mas não apresenta nenhum sintoma.
+                                </Text>
+                                <Text style={styles.subtitulo}>
+                                    Casos Leves
+                                </Text>
+                                <Text style={styles.pargrafo}>
+                                    Presença de um ou mais sintomas como: Tosse; Dor de garganta; Coriza (nariz escorrendo); Febre; Mal-estar; Dor de cabeça; Dores musculares (mialgia); Náuseas, vômitos ou diarreia; Perda do olfato (anosmia) e/ou paladar (ageusia). Não há falta de ar nem alterações nas imagens do tórax.
+                                </Text>
+                                <Text style={styles.subtitulo}>
+                                    Casos Moderados
+                                </Text>
+                                <Text style={styles.pargrafo}>
+                                    Apresentam os sintomas descritos nos casos leves. A saturação de oxigênio no sangue (SpO₂) é igual ou maior que 94% em ar ambiente. A avaliação precisa ser confirmada em unidade de saúde.
+                                </Text>
+                                <Text style={styles.subtitulo}>
+                                    Casos Graves
+                                </Text>
+                                <Text style={styles.pargrafo}>
+                                    O paciente apresenta um ou mais sinais de alerta: Falta de ar ou dificuldade para respirar (dispneia); Pressão persistente no peito; Saturação de oxigênio igual ou inferior a 94%; Coloração azulada nos lábios ou no rosto.
+                                </Text>
+                                <Text style={styles.subtitulo}>                                
+                                Casos Críticos
+                                </Text>
+                                <Text style={styles.pargrafo}>
+                                    O paciente pode desenvolver condições muito graves, como: Síndrome do Desconforto Respiratório Agudo (SDRA); Sepse e choque séptico; Trombose aguda; Falência de múltiplos órgãos.
+                                </Text>
 
+                                <DividerWithText text="Transmissão" />
+                                <Text style={styles.pargrafo}>
+                                    A COVID-19 é uma doença altamente transmissível e qualquer pessoa pode ser infectada. Mesmo aqueles que não apresentam sintomas podem transmitir o vírus para outras pessoas. Por isso, as medidas de prevenção são essenciais para todos​.
+                                </Text>
+                                <Text style={styles.subtitulo}>
+                                    O vírus SARS-CoV-2 é transmitido de três principais maneiras:
+                                </Text>
+                                <View style={styles.tranBallon}>
+                                    <Text style={styles.pargrafo}>Contato Direto: Acontece quando uma pessoa toca diretamente uma pessoa infectada ou superfícies contaminadas e, em seguida, leva as mãos ao rosto (boca, nariz ou olhos), facilitando a entrada do vírus no organismo.
+                                        
+                                    </Text>
+                                </View>
+                            </View>
                          </View>
 
                     </>
@@ -192,10 +240,6 @@ const styles = StyleSheet.create({
         marginLeft: "auto",
         marginRight: "auto",
     },
-    fullWidth: {
-        width: '100%',
-        alignSelf: 'stretch',
-    },
     titulo: {
         alignItems: "center",
         fontFamily: "Alumni Sans SC",
@@ -223,6 +267,17 @@ const styles = StyleSheet.create({
         lineHeight: 22,
         color: "#000000",
         marginBottom: 10,
+    },
+    tranBallon: {
+        alignItems: "flex-start",
+        justifyContent: "center",
+        width: 400,
+        borderRadius: 10,
+        backgroundColor: "#ffffff",
+        marginLeft: "auto",
+        marginRight: "auto",
+        borderWidth: 1,
+        borderColor: "#000000",
     },
     bulletPoint: {
         fontFamily: "Alumni Sans SC",
