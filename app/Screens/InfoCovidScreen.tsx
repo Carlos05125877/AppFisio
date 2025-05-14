@@ -75,12 +75,60 @@ const infoCovidScreen: React.FC = () => {
                                     O vírus SARS-CoV-2 é transmitido de três principais maneiras:
                                 </Text>
                                 <View style={styles.tranBallon}>
-                                    <Text style={styles.pargrafo}>Contato Direto: Acontece quando uma pessoa toca diretamente uma pessoa infectada ou superfícies contaminadas e, em seguida, leva as mãos ao rosto (boca, nariz ou olhos), facilitando a entrada do vírus no organismo.
+                                    <Image style={{ marginTop: 8, marginRight: 5 }}
+                                        source={require('../../assets/images/Polygon.png')}
+                                        />
+                                    <Text style={styles.pargrafo2}>Contato Direto: Acontece quando uma pessoa toca diretamente uma pessoa infectada ou superfícies contaminadas e, em seguida, leva as mãos ao rosto (boca, nariz ou olhos), facilitando a entrada do vírus no organismo.
                                         
                                     </Text>
                                 </View>
+
+                                <View style={styles.tranBallon}>
+                                    <Image style={{ marginTop: 8, marginRight: 5 }}
+                                        source={require('../../assets/images/Polygon.png')}
+                                        />
+                                    <Text style={styles.pargrafo2}>Gotículas Respiratórias: Gotículas maiores são liberadas quando uma pessoa infectada tosse, espirra ou fala. Essas gotículas podem atingir outra pessoa que esteja a menos de 1 metro de distância.
+                                        
+                                    </Text>
+                                </View>
+
+                                <View style={styles.tranBallon}>
+                                    <Image style={{ marginTop: 8, marginRight: 5 }}
+                                        source={require('../../assets/images/Polygon.png')}
+                                        />
+                                    <Text style={styles.pargrafo2}>Aerossóis: São partículas ainda menores e mais leves que gotículas, capazes de permanecer no ar por várias horas. Podem se espalhar em distâncias superiores a 1 metro, especialmente: Em locais fechados e mal ventilados; Durante atividades que aumentam o esforço respiratório, como gritar, cantar ou praticar exercícios físicos em grupo.
+                                        
+                                    </Text>
+                                </View>
+
+                                <Image
+                                    source={require('../../assets/images/covidImage2.png')}
+                                    style={styles.image}
+                                />
+
+                                
                             </View>
-                         </View>
+                            <View style={styles.incucacaoArea}>
+                                <View style={styles.tranBallon2}>
+                                    <Text style={styles.titulo}>Incubação:
+                                    </Text>
+                                
+                                    <Text style={styles.pargrafo2}>Com a circulação da variante Ômicron, o tempo médio entre o contato com o vírus e o surgimento dos primeiros sintomas passou a ser de 3 a 4 dias, podendo variar de 1 a 10 dias​.
+                                    </Text>
+                                </View>
+                                <View style={styles.tranBallon2}>
+                                    <Text style={styles.titulo}>Transmissão:
+                                    </Text>                                  
+                                    <Text style={styles.pargrafo2}>Diretamente, pelo contato próximo com uma pessoa infectada;Indiretamente, por meio do contato com superfícies ou objetos contaminados.
+                                    </Text>
+                                </View>
+                            </View>
+                            <Image
+                                source={require('../../assets/images/Ouvidoria.png')}
+                                style={styles.image}
+                            />
+                            
+                        </View>
 
                     </>
                 );
@@ -257,27 +305,67 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 20,
         lineHeight: 28,
-        color: "#000000",
+        color: "#012B78",
         marginTop: 20,
         marginBottom: 10,
     },
     pargrafo: {
         fontFamily: "Alumni Sans SC",
-        fontSize: 16,
+        fontSize: 13,
         lineHeight: 22,
         color: "#000000",
         marginBottom: 10,
     },
+    pargrafo2: {
+        fontFamily: "Alumni Sans SC",
+        fontSize: 13,
+        lineHeight: 22,
+        color: "#000000",
+        marginBottom: 10,
+        width: "99%",
+    },
     tranBallon: {
+        flexDirection: "row",
         alignItems: "flex-start",
         justifyContent: "center",
-        width: 400,
+        width: "100%",
         borderRadius: 10,
-        backgroundColor: "#ffffff",
+        height: "auto",
         marginLeft: "auto",
         marginRight: "auto",
         borderWidth: 1,
-        borderColor: "#000000",
+        borderColor: "#4CAF50",
+        paddingLeft: 10,
+        marginBottom: 10,
+        
+    },
+    incucacaoArea: {
+        marginTop: 10,
+        width: "100%",
+        padding: 20,
+        backgroundColor: "#4CAF5033",
+        marginLeft: "auto",
+        marginRight: "auto",
+    },
+    tranBallon2: {
+        alignItems: "flex-start",
+        justifyContent: "center",
+        width: "90%",
+        borderRadius: 10,
+        height: "auto",
+        marginLeft: "auto",
+        marginRight: "auto",
+        backgroundColor: "#ffffff",
+        paddingLeft: 10,
+        marginBottom: 10,
+    },
+    RiscosArea: {
+        marginTop: 10,
+        width: "100%",
+        padding: 20,
+        backgroundColor: "#E5E5E580",
+        marginLeft: "auto",
+        marginRight: "auto",
     },
     bulletPoint: {
         fontFamily: "Alumni Sans SC",
