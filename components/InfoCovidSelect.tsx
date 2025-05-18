@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
+    gap: 2,
     width: "100%",
   },
   Button: {

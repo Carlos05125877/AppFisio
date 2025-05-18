@@ -1,39 +1,35 @@
-import * as React from "react";
+import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-interface DividerWithTextProps {
+type DividerWithTextProps = {
   text: string;
-}
-
-const DividerWithText: React.FC<DividerWithTextProps> = ({ text }) => {
-  return (
-    <View style={styles.dividerContainer}>
-      <View style={styles.dividerLine} />
-      <Text style={styles.dividerText}>{text}</Text>
-      <View style={styles.dividerLine} />
-    </View>
-  );
+  styleContainer?: object;
+  styleText?: object;
+  styleLine?: object;
 };
 
+const DividerWithText: React.FC<DividerWithTextProps> = ({ text, styleContainer, styleText, styleLine }) => (
+  <View style={[styles.container, styleContainer]}>
+    <View style={[styles.line, styleLine]} />
+    <Text style={[styles.text, styleText]}>{text}</Text>
+    <View style={[styles.line, styleLine]} />
+  </View>
+);
+
 const styles = StyleSheet.create({
-  dividerContainer: {
-    display: "flex",
+  container: {
     flexDirection: "row",
     alignItems: "center",
-    width: "100%",
-    marginBottom: 32,
+    justifyContent: "center",
+    
   },
-  dividerLine: {
-    flex: 1,
-    height: 1.5,
-    backgroundColor: "#747373",
+  line: {
+    height: 1,
+    
   },
-  dividerText: {
+  text: {
     marginHorizontal: 10,
-    color: "#747373", 
-    fontFamily: "Alumni Sans SC", 
-    fontSize: 15,
-    textAlign: "center",
+    fontSize: 14,
   },
 });
 

@@ -38,8 +38,12 @@ const HomeScreen: React.FC = () => {
                     <Text style={styles.cadastrarText}>Cadastrar</Text>
                 </TouchableOpacity>
 
-                <DividerWithText text="Entrar com" />
-
+                <DividerWithText
+                    text="Entrar com"
+                    styleContainer={{ with: "100%", marginBottom: 25 }}
+                    styleLine={{ backgroundColor: "#747373", height: 1, width: "25%" }}
+                    styleText={{ color: "#747373", fontSize: 15 }}
+                />
                 <View style={styles.entrarComContainer}>
                     <GoogleButton />
                     <AppleButton />
