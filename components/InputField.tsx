@@ -5,16 +5,19 @@ interface InputFieldProps {
   label: string;
   inputType: string;
   secureTextEntry: boolean;
+  value: string;
+  onChangeText: (text: string) => void;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
   label,
   inputType,
   secureTextEntry,
+  value,
+  onChangeText,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
-  const [value, setValue] = useState("");
-
+  
   return (
     <View style={styles.inputWrapper}>
       <View style={styles.inputLabel}>
@@ -26,10 +29,9 @@ const InputField: React.FC<InputFieldProps> = ({
         keyboardType={inputType === "email" ? "email-address" : "default"}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        onChangeText={setValue}
+        onChangeText={onChangeText}
         value={value}
       />
-      
     </View>
   );
 };

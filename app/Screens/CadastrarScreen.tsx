@@ -1,109 +1,148 @@
 import * as React from "react";
-import { View, Image, Text, StyleSheet, TouchableOpacity, ScrollView, Animated } from "react-native";
-import { GestureHandlerRootView, PanGestureHandler } from "react-native-gesture-handler";
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import InputField from "../../components/InputField";
 import { useRouter } from "expo-router";
 import Button from "@/components/Button";
 
-const CadastrarScreen: React.FC = () => {
+
+// Importações do Firebase
+import { auth, db } from "../../app/firebase/config";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { useState } from "react";
+
+
+const CadastroScreen: React.FC = () => {
     const router = useRouter();
-    const translateX = new Animated.Value(0);
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false);
 
-    const onGestureEvent = Animated.event(
-        [{ nativeEvent: { translationX: translateX } }],
-        { useNativeDriver: true }
-    );
+    // Função para registro com email/senha e salvamento no Firestore
+    const handleRegister = async (): Promise<void> => {
+        if (!email || !password || !confirmPassword) {
+            Alert.alert('Erro', 'Por favor, preencha todos os campos');
+            return;
+        }
 
-    const onHandlerStateChange = (event: any) => {
-        if (event.nativeEvent.oldState === 4) {
-            const { translationX } = event.nativeEvent;
+        if (password !== confirmPassword) {
+            Alert.alert('Erro', 'As senhas não coincidem');
+            return;
+        }
+
+        setLoading(true);
+        try {
+            // Criar o usuário no Authentication
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
             
-            if (translationX > 50) {
-                router.back();
-            } else {
-                Animated.spring(translateX, {
-                    toValue: 0,
-                    useNativeDriver: true,
-                }).start();
+            // Salvar dados do usuário no Firestore
+            await setDoc(doc(db, "users", user.uid), {
+                email: user.email,
+                uid: user.uid,
+                createdAt: new Date().toISOString(),
+              
+            });
+            
+            Alert.alert('Sucesso', 'Conta criada com sucesso!');
+            router.push('/Screens/InfoCovidScreen');
+        } catch (error: any) {
+            console.error(error);
+            let errorMessage = 'Não foi possível criar a conta';
+            if (error.code === 'auth/email-already-in-use') {
+                errorMessage = 'Este email já está em uso';
+            } else if (error.code === 'auth/weak-password') {
+                errorMessage = 'A senha deve ter pelo menos 6 caracteres';
+            } else if (error.code === 'auth/invalid-email') {
+                errorMessage = 'Email inválido';
             }
+            Alert.alert('Erro de cadastro', errorMessage);
+        } finally {
+            setLoading(false);
         }
     };
 
+    // Função para voltar à tela de login
+    const handleBackToLogin = (): void => {
+        router.push('/'); // Ajuste conforme a rota da tela de login
+    };
+
     return (
-        <GestureHandlerRootView style={styles.container}>
-            <PanGestureHandler
-                onGestureEvent={onGestureEvent}
-                onHandlerStateChange={onHandlerStateChange}
-            >
-                <Animated.View style={[
-                    styles.container,
-                    {
-                        transform: [{ translateX }]
-                    }
-                ]}>
-
-                    
-                    <View style={styles.content}>
-                        <View>
-                            <Text style={styles.titulo}>Efetue seu cadastro</Text>
-                        </View>
-                        <View style={styles.inputContainer}>
-
-                            <View style={{marginBottom: 20, width:300}}  >
-                            <InputField 
-                            label="Nome" 
-                            inputType="text" 
-                            secureTextEntry={false} />
-                            </View>
-
-                            <View style={{marginBottom: 20, width:300}}  >
-                            <InputField 
-                            label="Email" 
-                            inputType="text" 
-                            secureTextEntry={false} />
-                            </View>
-
-                            <View style={{marginBottom: 20, width:300}}  >
-                            <InputField 
-                            label="Senha" 
-                            inputType="text" 
-                            secureTextEntry={true} />
-                            </View>
-                        </View>
-                        <Button onPress={() => router.push('/Screens/HomeScreen')} titulo="Cadastrar" />
-                    </View>
-                    
-                </Animated.View>
-            </PanGestureHandler>
-        </GestureHandlerRootView>
-        
+         <View style={styles.container}>
+            <View style={styles.content}>
+                <View>
+                    <Text style={styles.title}>Crie sua conta</Text>
+                </View>
+                <View style={styles.inputContainer}>
+                    <InputField
+                        label="Email"
+                        inputType="email"
+                        secureTextEntry={false}
+                        value ={email}
+                        onChangeText={setEmail}
+                    />
+                    <InputField
+                        label="Senha"
+                        inputType="password"
+                        secureTextEntry={true}
+                        value={password}
+                        onChangeText={setPassword}
+                    />
+                    <InputField
+                        label="Confirmar Senha"
+                        inputType="password"
+                        secureTextEntry={true}
+                        value={confirmPassword}
+                        onChangeText={setConfirmPassword}
+                    />
+                </View>
+                <Button onPress={handleRegister} titulo={loading ? "Carregando..." : "Cadastrar"} />
+            </View>
+        </View>
     );
+};
     
-   
-}
 
-// Estilos
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: "#fff",
-    },
-    content: {
-        flex: 1,
-        padding: 20,
-        width: "100%",
-        height: "100%",
+        display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        paddingTop: 50,
+        paddingBottom: 10,
+        backgroundColor: "#ffffff",
+        flex: 1,
     },
-    titulo: {
-        fontSize: 24,
-        fontWeight: "bold",
+    content: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: 302,
+    },
+    title: {
+        marginBottom: 25,
+        color: "#333",
+        fontFamily: "Open Sans",
+        fontSize: 20,
         textAlign: "center",
-        marginBottom: 30,
+        justifyContent: "center",
     },
     inputContainer: {
-        marginBottom: 20,
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        marginBottom: 25,
+        gap: 25,
+    },
+    voltarLoginText: {
+        color: "#747373",
+        fontFamily: "Alumni Sans SC",
+        fontSize: 16,
+        textAlign: "center",
+        justifyContent: "center",
+        marginTop: 15,
     },
 });
-export default CadastrarScreen;
+
+export default CadastroScreen;
