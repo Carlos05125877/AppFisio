@@ -12,25 +12,27 @@ const FakeNews: React.FC = () => {
         />
         <View style={styles.infoTextBox}>
           <Text style={styles.infoTitle}>Desinformação também adoece</Text>
-          <Text style={styles.description}>
+          
+        </View>
+      </View>
+      <View style={styles.fakeNewsSection}>
+        
+        <Text style={styles.description}>
             <Text style={styles.boldText}>A desinformação sobre a COVID-19 </Text>
             <Text style={styles.normalText}>
               ainda circula forte e pode colocar vidas em risco. Boatos como "existe um plano para criar uma nova pandemia" ou "vacina causa doenças graves" não têm nenhuma base científica e já foram desmentidos por órgãos oficiais como o Ministério da Saúde, Fiocruz e veículos de checagem como o G1 Fato ou Fake.
               {"\n\n"}
               As fake news se espalham rápido, mas a verdade também pode. Por isso, sempre que receber uma mensagem duvidosa, pergunte:
-              {"\n"}• Quem está dizendo isso?
-              {"\n"}• Há fonte confiável?
-              {"\n"}• Está em sites como gov.br, Fiocruz, ou checado por jornalistas?
-              {"\n\n"}
-              Não compartilhe se tiver dúvida. Cheque antes. Desinformar é perigoso, especialmente em tempos de pandemia.
+              {"\n"}Quem está dizendo isso?
+              {"\n"}Há fonte confiável?
+              {"\n"}Está em sites como gov.br, Fiocruz, ou checado por jornalistas?  
+              
+              {"\n"}{"\n"}Não compartilhe se tiver dúvida. Cheque antes. Desinformar é perigoso, especialmente em tempos de pandemia.
+              {"\n"}
+            
             </Text>
           </Text>
-        </View>
-      </View>
-
-      <View style={styles.fakeNewsSection}>
         <Text style={styles.sectionTitle}>Principais Fake News sobre COVID-19</Text>
-
         <View style={styles.newsItem}>
           <Text style={styles.falseTag}>FALSO</Text>
           <Text style={styles.newsTitle}>Estão planejando uma nova pandemia em 2025!</Text>
@@ -200,8 +202,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   infoImage: {
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
     marginRight: 12,
     resizeMode: "contain",
   },
@@ -215,7 +217,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   description: {
-    fontSize: 14,
+    fontSize: 15,
     color: "#222",
   },
   boldText: {

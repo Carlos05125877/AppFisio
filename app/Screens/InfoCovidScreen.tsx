@@ -5,6 +5,10 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import InfoCovidSelect from "@/components/InfoCovidSelect";
 import Header from "@/components/Header";
 import InformacoesGerais from "@/components/InformacoesGerais";
+import Atualizacao from "@/components/Atualizacao";
+import FakeNews from "@/components/FakeNews";
+import Sus from "@/components/Sus";
+import Tecnologia from "@/components/Tecnologia";
 
 const infoCovidScreen: React.FC = () => {
     const router = useRouter();
@@ -17,23 +21,21 @@ const infoCovidScreen: React.FC = () => {
                     <InformacoesGerais/>
                 );
            
-            case 'EFEITOS_COVID':
+            case 'TECNOLOGIA':
                 return (
-                    <>
-                        
-                    </>
+                    <Tecnologia/>
+                );
+            case 'SUS_PANDEMIA':
+                return (
+                    <Sus/>
                 );
             case 'ATUALIZACOES':
                 return (
-                    <>
-                        
-                    </>
+                    <Atualizacao/>
                 );
             case 'FAKE_NEWS':
                 return (
-                    <>
-                        
-                    </>
+                    <FakeNews/>
                 );
            
             default:
