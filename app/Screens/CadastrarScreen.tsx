@@ -6,7 +6,8 @@ import Button from "@/components/Button";
 
 
 // Importações do Firebase
-import { auth, db } from "../../app/firebase/config";
+import { auth, db } from "../firebase/config";
+
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
