@@ -10,10 +10,7 @@ import HomeSelect from "@/components/HomeSelect";
 
 const HomeScreen: React.FC = () => {
     const router = useRouter();
-    const [email, setEmail] = React.useState("");
-    const [senha, setSenha] = React.useState("");
-
-    return (
+	return (
         
         <View style={styles.container}>
             <View style={styles.content}>
@@ -22,20 +19,14 @@ const HomeScreen: React.FC = () => {
                 </View>
                 <View style={styles.inputContainer}>
                     <InputField 
-                        label="Email" 
-                        inputType="email" 
-                        secureTextEntry={false}
-                        value={email}
-                        onChangeText={setEmail}
-                    />
+                    label="Email" 
+                    inputType="email" 
+                    secureTextEntry={false} />
 
                     <InputField
-                        label="Senha"
-                        inputType="password"
-                        secureTextEntry={true}
-                        value={senha}
-                        onChangeText={setSenha}
-                    />
+                    label="Senha"
+                    inputType="password"
+                    secureTextEntry={true}/>
                 </View>
                 <Button onPress={() => router.push('/Screens/InfoCovidScreen')} titulo="Acessar" />
 
