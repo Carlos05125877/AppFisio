@@ -47,7 +47,7 @@ const CadastroScreen: React.FC = () => {
             });
             
             Alert.alert('Sucesso', 'Conta criada com sucesso!');
-            router.push('/Screens/InfoCovidScreen');
+            router.push('/Screens/HomeScreen');
         } catch (error: any) {
             console.error(error);
             let errorMessage = 'Não foi possível criar a conta';
