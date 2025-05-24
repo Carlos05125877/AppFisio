@@ -1,17 +1,14 @@
 import * as React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert, Animated } from "react-native";
 import InputField from "../../components/InputField";
 import { useRouter } from "expo-router";
 import Button from "@/components/Button";
-
-
-// Importações do Firebase
 import { auth, db } from "../firebase/config";
-
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { useState } from "react";
-
+import { useState, useRef } from "react";
+import { GestureHandlerRootView, PanGestureHandler } from "react-native-gesture-handler";
+import Header from "@/components/Header";
 
 const CadastroScreen: React.FC = () => {
     const router = useRouter();
@@ -19,6 +16,28 @@ const CadastroScreen: React.FC = () => {
     const [password, setPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
+
+    // Para animação do gesto
+    const translateX = useRef(new Animated.Value(0)).current;
+
+    const onGestureEvent = Animated.event(
+        [{ nativeEvent: { translationX: translateX } }],
+        { useNativeDriver: true }
+    );
+
+    const onHandlerStateChange = (event: any) => {
+        if (event.nativeEvent.oldState === 4) {
+            const { translationX } = event.nativeEvent;
+            if (translationX > 80) {
+                router.push('/Screens/HomeScreen');
+            } else {
+                Animated.spring(translateX, {
+                    toValue: 0,
+                    useNativeDriver: true,
+                }).start();
+            }
+        }
+    };
 
     // Função para registro com email/senha e salvamento no Firestore
     const handleRegister = async (): Promise<void> => {
@@ -43,7 +62,6 @@ const CadastroScreen: React.FC = () => {
                 email: user.email,
                 uid: user.uid,
                 createdAt: new Date().toISOString(),
-              
             });
             
             Alert.alert('Sucesso', 'Conta criada com sucesso!');
@@ -70,40 +88,47 @@ const CadastroScreen: React.FC = () => {
     };
 
     return (
-         <View style={styles.container}>
-            <View style={styles.content}>
-                <View>
-                    <Text style={styles.title}>Crie sua conta</Text>
-                </View>
-                <View style={styles.inputContainer}>
-                    <InputField
-                        label="Email"
-                        inputType="email"
-                        secureTextEntry={false}
-                        value ={email}
-                        onChangeText={setEmail}
-                    />
-                    <InputField
-                        label="Senha"
-                        inputType="password"
-                        secureTextEntry={true}
-                        value={password}
-                        onChangeText={setPassword}
-                    />
-                    <InputField
-                        label="Confirmar Senha"
-                        inputType="password"
-                        secureTextEntry={true}
-                        value={confirmPassword}
-                        onChangeText={setConfirmPassword}
-                    />
-                </View>
-                <Button onPress={handleRegister} titulo={loading ? "Carregando..." : "Cadastrar"} />
-            </View>
-        </View>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+            <Header />
+            <PanGestureHandler
+                onGestureEvent={onGestureEvent}
+                onHandlerStateChange={onHandlerStateChange}
+            >
+                <Animated.View style={[styles.container, { transform: [{ translateX }] }]}>
+                    <View style={styles.content}>
+                        <View>
+                            <Text style={styles.title}>Crie sua conta</Text>
+                        </View>
+                        <View style={styles.inputContainer}>
+                            <InputField
+                                label="Email"
+                                inputType="email"
+                                secureTextEntry={false}
+                                value={email}
+                                onChangeText={setEmail}
+                            />
+                            <InputField
+                                label="Senha"
+                                inputType="password"
+                                secureTextEntry={true}
+                                value={password}
+                                onChangeText={setPassword}
+                            />
+                            <InputField
+                                label="Confirmar Senha"
+                                inputType="password"
+                                secureTextEntry={true}
+                                value={confirmPassword}
+                                onChangeText={setConfirmPassword}
+                            />
+                        </View>
+                        <Button onPress={handleRegister} titulo={loading ? "Carregando..." : "Cadastrar"} />
+                    </View>
+                </Animated.View>
+            </PanGestureHandler>
+        </GestureHandlerRootView>
     );
 };
-    
 
 const styles = StyleSheet.create({
     container: {
