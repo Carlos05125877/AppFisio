@@ -1,9 +1,6 @@
 import * as React from "react";
 import { View, Image, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
-import { useRouter } from "expo-router";
-
 import TituloCovid from "@/components/TituloCovid";
-import Header from "@/components/Header";
 import DividerWithText from "@/components/DividerWithText";
 import { Linking } from "react-native";
 
@@ -68,7 +65,7 @@ const informacoesGerais: React.FC = () => {
 
                     <DividerWithText 
                     text="TRANSMISSÃO" 
-                    styleContainer={{marginBottom: 25, marginRight: 20 }}
+                    styleContainer={{marginBottom: 10, marginRight: 20, paddingTop: 10}}
                     styleLine={{ backgroundColor: "#747373", height: 1, width: 50 }}  
                     styleText={{ color: "#012B78", fontSize: 16 ,fontWeight: "bold"}}
                     />
@@ -262,7 +259,7 @@ const styles = StyleSheet.create({
     },
     areaTexto: {
         marginTop: 10,
-        width: 400,
+        width: "auto",
         padding: 20,
         backgroundColor: "#ffffff",
         marginLeft: "auto",
@@ -270,6 +267,7 @@ const styles = StyleSheet.create({
     },
 
     areaTexto2: {
+        marginTop: 10,
         alignItems: "flex-start",
         justifyContent: "center",
         width: 350,
@@ -291,8 +289,6 @@ const styles = StyleSheet.create({
         padding: 10,
         paddingLeft: 20,
         paddingRight: 20,
-
-
     },
     imagem: {
         width: 229,
@@ -478,11 +474,12 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     bannerSUS: {
-        width: 410,
+        width: "100%",
         height: 410,
         marginTop: 10,
         marginLeft: "auto",
         marginRight: "auto",
+        marginBottom: 34
     },
     areaPrevencao: {
         marginTop: 10,

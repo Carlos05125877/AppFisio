@@ -58,7 +58,7 @@ const HomeScreen: React.FC = () => {
                                     label="FISIOTERAPIA"
                                     label2=" "
                                     onPress={() =>
-                                        router.push("/Screens/InfoCovidScreen")  
+                                        router.push("/Screens/FisioScreen")  
                                     }
                                 />
                                 <ReabilitacaoSelect

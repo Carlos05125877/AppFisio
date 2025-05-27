@@ -5,23 +5,18 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/logoApp.png",
-    "scheme": "com.projeto.coronafatos",
+    "scheme": "Corona Fatos",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    "assetBundlePatterns": [
-      "**/*"
-    ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.projeto.coronafatos"
+      "supportsTablet": true
     },
     "android": {
       "package": "com.projeto.coronafatos",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/logoApp.png",
         "backgroundColor": "#ffffff"
-      },
-      "googleServicesFile": "./google-services.json"
+      }
     },
     "web": {
       "bundler": "metro",
@@ -38,11 +33,11 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ],
-      "expo-web-browser"
+      ]
     ],
     "experiments": {
       "typedRoutes": true
     }
   }
+  
 }

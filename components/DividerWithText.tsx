@@ -24,8 +24,7 @@ const styles = StyleSheet.create({
     
   },
   line: {
-    height: 1,
-    
+    height: 1, 
   },
   text: {
     marginHorizontal: 10,

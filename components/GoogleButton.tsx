@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
 
 const GoogleButton: React.FC = () => {
   return (
+    
     <TouchableOpacity style={styles.googleButton}>
       <View>
         <Image

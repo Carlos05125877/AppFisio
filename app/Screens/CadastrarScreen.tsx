@@ -27,124 +27,124 @@ const CadastroScreen = () => {
   }, []);
 
   const handleRegister = async () => {
-  if (!email || !password || !confirmPassword) {
-    Alert.alert("Erro", "Por favor, preencha todos os campos");
-    return;
-  }
-
-  if (password !== confirmPassword) {
-    Alert.alert("Erro", "As senhas não coincidem");
-    return;
-  }
-
-  setLoading(true);
-  try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
-
-    await setDoc(doc(db, "users", user.uid), {
-      email: user.email,
-      uid: user.uid,
-      provider: "email",
-      createdAt: new Date().toISOString(),
-    });
-
-    Alert.alert("Sucesso", "Conta criada com sucesso!");
-    router.push("/Screens/InfoCovidScreen");
-  } catch (err: unknown) {
-    const error = err as FirebaseError;
-    console.error(error);
-    let errorMessage = "Não foi possível criar a conta";
-    if (error.code === "auth/email-already-in-use") {
-      errorMessage = "Este email já está em uso";
-    } else if (error.code === "auth/weak-password") {
-      errorMessage = "A senha deve ter pelo menos 6 caracteres";
-    } else if (error.code === "auth/invalid-email") {
-      errorMessage = "Email inválido";
+    if (!email || !password || !confirmPassword) {
+      Alert.alert("Erro", "Por favor, preencha todos os campos");
+      return;
     }
-    Alert.alert("Erro de cadastro", errorMessage);
-  } finally {
-    setLoading(false);
-  }
-};
 
-  const handleGoogleRegister = async () => {
-  setGoogleLoading(true);
-  try {
-    if (Platform.OS === "web") {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
+    if (password !== confirmPassword) {
+      Alert.alert("Erro", "As senhas não coincidem");
+      return;
+    }
 
-      const userDoc = await getDoc(doc(db, "users", user.uid));
-
-      if (!userDoc.exists()) {
-        await setDoc(doc(db, "users", user.uid), {
-          email: user.email,
-          displayName: user.displayName,
-          photoURL: user.photoURL,
-          uid: user.uid,
-          provider: "google",
-          createdAt: new Date().toISOString(),
-        });
-
-        Alert.alert("Sucesso", "Conta criada com sucesso usando Google!");
-      } else {
-        Alert.alert("Sucesso", "Login realizado com sucesso!");
-      }
-
-      router.push("/Screens/InfoCovidScreen");
-    } else {
-      await GoogleSignin.hasPlayServices();
-      const userInfo = await GoogleSignin.signIn();
-      const { idToken, accessToken } = await GoogleSignin.getTokens();
-
-      const googleCredential = GoogleAuthProvider.credential(idToken, accessToken);
-      const userCredential = await signInWithCredential(auth, googleCredential);
+    setLoading(true);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      const userDoc = await getDoc(doc(db, "users", user.uid));
+      await setDoc(doc(db, "users", user.uid), {
+        email: user.email,
+        uid: user.uid,
+        provider: "email",
+        createdAt: new Date().toISOString(),
+      });
 
-      if (!userDoc.exists()) {
-        await setDoc(doc(db, "users", user.uid), {
-          email: user.email,
-          displayName: user.displayName,
-          photoURL: user.photoURL,
-          uid: user.uid,
-          provider: "google",
-          createdAt: new Date().toISOString(),
-        });
+      Alert.alert("Sucesso", "Conta criada com sucesso!");
+      router.push("/Screens/InfoCovidScreen");
+    } catch (err: unknown) {
+      const error = err as FirebaseError;
+      console.error(error);
+      let errorMessage = "Não foi possível criar a conta";
+      if (error.code === "auth/email-already-in-use") {
+        errorMessage = "Este email já está em uso";
+      } else if (error.code === "auth/weak-password") {
+        errorMessage = "A senha deve ter pelo menos 6 caracteres";
+      } else if (error.code === "auth/invalid-email") {
+        errorMessage = "Email inválido";
+      }
+      Alert.alert("Erro de cadastro", errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-        Alert.alert("Sucesso", "Conta criada com sucesso usando Google!");
+  const handleGoogleRegister = async () => {
+    setGoogleLoading(true);
+    try {
+      if (Platform.OS === "web") {
+        const provider = new GoogleAuthProvider();
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+
+        if (!userDoc.exists()) {
+          await setDoc(doc(db, "users", user.uid), {
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+            uid: user.uid,
+            provider: "google",
+            createdAt: new Date().toISOString(),
+          });
+
+          Alert.alert("Sucesso", "Conta criada com sucesso usando Google!");
+        } else {
+          Alert.alert("Sucesso", "Login realizado com sucesso!");
+        }
+
+        router.push("/Screens/InfoCovidScreen");
       } else {
-        Alert.alert("Sucesso", "Login realizado com sucesso!");
+        await GoogleSignin.hasPlayServices();
+        const userInfo = await GoogleSignin.signIn();
+        const { idToken, accessToken } = await GoogleSignin.getTokens();
+
+        const googleCredential = GoogleAuthProvider.credential(idToken, accessToken);
+        const userCredential = await signInWithCredential(auth, googleCredential);
+        const user = userCredential.user;
+
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+
+        if (!userDoc.exists()) {
+          await setDoc(doc(db, "users", user.uid), {
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+            uid: user.uid,
+            provider: "google",
+            createdAt: new Date().toISOString(),
+          });
+
+          Alert.alert("Sucesso", "Conta criada com sucesso usando Google!");
+        } else {
+          Alert.alert("Sucesso", "Login realizado com sucesso!");
+        }
+
+        router.push("/Screens/InfoCovidScreen");
+      }
+    } catch (err: unknown) {
+      const error = err as FirebaseError;
+      console.error("Erro no cadastro com Google:", error);
+
+      let errorMessage = "Não foi possível fazer cadastro com Google";
+
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        errorMessage = "Cadastro cancelado pelo usuário";
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        errorMessage = "Cadastro já em andamento";
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        errorMessage = "Google Play Services não disponível";
+      } else if (error.code === "auth/account-exists-with-different-credential") {
+        errorMessage = "Já existe uma conta com este email usando outro método de cadastro";
       }
 
-      router.push("/Screens/InfoCovidScreen");
+      if (error.code !== statusCodes.SIGN_IN_CANCELLED) {
+        Alert.alert("Erro de cadastro", errorMessage);
+      }
+    } finally {
+      setGoogleLoading(false);
     }
-  } catch (err: unknown) {
-    const error = err as FirebaseError;
-    console.error("Erro no cadastro com Google:", error);
-
-    let errorMessage = "Não foi possível fazer cadastro com Google";
-
-    if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-      errorMessage = "Cadastro cancelado pelo usuário";
-    } else if (error.code === statusCodes.IN_PROGRESS) {
-      errorMessage = "Cadastro já em andamento";
-    } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-      errorMessage = "Google Play Services não disponível";
-    } else if (error.code === "auth/account-exists-with-different-credential") {
-      errorMessage = "Já existe uma conta com este email usando outro método de cadastro";
-    }
-
-    if (error.code !== statusCodes.SIGN_IN_CANCELLED) {
-      Alert.alert("Erro de cadastro", errorMessage);
-    }
-  } finally {
-    setGoogleLoading(false);
-  }
-};
+  };
 
   const handleBackToLogin = () => {
     router.push("/");
