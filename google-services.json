@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "468440457794",
+    "project_id": "appfio",
+    "storage_bucket": "appfio.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468440457794:android:aab53742121a94d1d603db",
+        "android_client_info": {
+          "package_name": "com.projeto.coronafatos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "468440457794-gb27j453nhmvjc596tf1vqvue2vtkcrq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUoOXB86P-J8aMkdRaLHk_YMmiD4z0tU0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "468440457794-gb27j453nhmvjc596tf1vqvue2vtkcrq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
