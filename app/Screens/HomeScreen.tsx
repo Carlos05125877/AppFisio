@@ -1,15 +1,5 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
-import { 
-  View, 
-  Image, 
-  Text, 
-  StyleSheet, 
-  TouchableOpacity, 
-  ScrollView,
-  Platform,
-  Alert 
-} from "react-native";
+import { View, Image, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import InputField from "../../components/InputField";
 import { useRouter } from "expo-router";
 import Button from "@/components/Button";
@@ -17,105 +7,14 @@ import DividerWithText from "../../components/DividerWithText";
 import GoogleButton from "../../components/GoogleButton";
 import AppleButton from "@/components/AppleButton";
 import HomeSelect from "@/components/HomeSelect";
-import { GoogleSignin, statusCodes } from "@react-native-google-signin/google-signin";
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithCredential,
-} from "firebase/auth";
-import { doc, setDoc, getDoc } from "firebase/firestore";
-import { auth, db } from "../firebase/config";
-import { FirebaseError } from "firebase/app";
 
 const HomeScreen: React.FC = () => {
     const router = useRouter();
-    const [email, setEmail] = useState("");
-    const [senha, setSenha] = useState("");
-    const [googleLoading, setGoogleLoading] = useState(false);
-
-    useEffect(() => {
-        GoogleSignin.configure({
-            webClientId: "468440457794-gb27j453nhmvjc596tf1vqvue2vtkcrq.apps.googleusercontent.com", 
-        });
-    }, []);
-
-    const handleGoogleLogin = async () => {
-        setGoogleLoading(true);
-
-        try {
-            if (Platform.OS === "web") {
-                const provider = new GoogleAuthProvider();
-                const result = await signInWithPopup(auth, provider);
-                const user = result.user;
-
-                const userDoc = await getDoc(doc(db, "users", user.uid));
-
-                if (!userDoc.exists()) {
-                    await setDoc(doc(db, "users", user.uid), {
-                        email: user.email,
-                        displayName: user.displayName,
-                        photoURL: user.photoURL,
-                        uid: user.uid,
-                        provider: "google",
-                        createdAt: new Date().toISOString(),
-                    });
-                    Alert.alert("Sucesso", "Conta criada com sucesso via Google!");
-                } else {
-                    Alert.alert("Login", "Login realizado com sucesso!");
-                }
-
-                router.push("/Screens/InfoCovidScreen");
-            } else {
-                await GoogleSignin.hasPlayServices();
-                const userInfo = await GoogleSignin.signIn();
-                const { idToken, accessToken } = await GoogleSignin.getTokens();
-
-                const credential = GoogleAuthProvider.credential(idToken, accessToken);
-                const userCredential = await signInWithCredential(auth, credential);
-                const user = userCredential.user;
-
-                const userDoc = await getDoc(doc(db, "users", user.uid));
-                if (!userDoc.exists()) {
-                    await setDoc(doc(db, "users", user.uid), {
-                        email: user.email,
-                        displayName: user.displayName,
-                        photoURL: user.photoURL,
-                        uid: user.uid,
-                        provider: "google",
-                        createdAt: new Date().toISOString(),
-                    });
-                    Alert.alert("Sucesso", "Conta criada com sucesso via Google!");
-                } else {
-                    Alert.alert("Login", "Login realizado com sucesso!");
-                }
-
-                router.push("/Screens/InfoCovidScreen");
-            }
-        } catch (err: unknown) {
-            const error = err as FirebaseError;
-            console.error("Erro no login com Google:", error);
-
-            let errorMessage = "Erro ao fazer login com Google";
-
-            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-                errorMessage = "Login cancelado pelo usuário";
-            } else if (error.code === statusCodes.IN_PROGRESS) {
-                errorMessage = "Login já em andamento";
-            } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-                errorMessage = "Google Play Services não disponível";
-            } else if (error.code === "auth/account-exists-with-different-credential") {
-                errorMessage = "Já existe uma conta com este email usando outro método de login";
-            }
-
-            if (error.code !== statusCodes.SIGN_IN_CANCELLED) {
-                Alert.alert("Erro", errorMessage);
-            }
-        } finally {
-            setGoogleLoading(false);
-        }
-    };
+    const [email, setEmail] = React.useState("");
+    const [senha, setSenha] = React.useState("");
 
     return (
+        
         <View style={styles.container}>
             <View style={styles.content}>
                 <View>
@@ -155,9 +54,7 @@ const HomeScreen: React.FC = () => {
                     styleText={{ color: "#747373", fontSize: 15 }}
                 />
                 <View style={styles.entrarComContainer}>
-                    <TouchableOpacity onPress={handleGoogleLogin} disabled={googleLoading}>
-                        <GoogleButton />
-                    </TouchableOpacity>
+                    <GoogleButton />
                     <AppleButton />
                 </View>  
 
@@ -223,10 +120,14 @@ const HomeScreen: React.FC = () => {
                             }
                         />
                     </View>
+                    
                 </View> 
             </View>
         </View>
-    );
+        
+        
+	);
+
 }
 
 const styles = StyleSheet.create({
@@ -243,7 +144,7 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         alignItems: "center",
         width: 302,
-    },
+      },
     titulo: {
         marginBottom: 25,
         color: "#333",
@@ -258,7 +159,8 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         marginBottom: 25,
         gap: 25,
-    },
+      },
+
     esqueciSenhaText: {
         color: "#747373",
         fontFamily: "Alumni Sans SC",
@@ -298,7 +200,7 @@ const styles = StyleSheet.create({
         paddingRight: 3,
     },
     primeiraLinha: {
-        gap: 5,
+        gap:5,
         marginTop: "7%",
         marginBottom: 20,
         display: "flex",
@@ -306,15 +208,16 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "flex-start",
         marginLeft: "5%",
+        
     },
     segundaLinha: {
-        gap: 5,
+        gap:5,
         display: "flex",
         flexDirection: "row",
         alignItems: "flex-start",
         marginBottom: 20,
         marginLeft: "5%",
+        
     },
 });
-
 export default HomeScreen;
