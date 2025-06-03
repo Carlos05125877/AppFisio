@@ -7,15 +7,9 @@ const FisioScreen: React.FC = () => {
   const router = useRouter();
   return (
     <SafeAreaView style={styles.safeArea}>
-      <Header />
+      <Header title="FISIOTERAPIA"/>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={styles.containerPrincipal}>
-          <Text style={styles.titulo}>FISIOTERAPIA</Text>
-          <ImageBackground
-            style={styles.divisor}
-            source={{ uri: "https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-23/7ShVUpqSiJ.png" }}
-            resizeMode="cover"
-          />
           <Text style={styles.citacao}>“Seu corpo sente. A fisioterapia entende.”</Text>
           <Text style={styles.subtitulo}>O que é fisioterapia?</Text>
           <Text style={styles.paragrafo}>

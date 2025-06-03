@@ -129,7 +129,7 @@ const HomeScreen: React.FC = () => {
                             label="GUIA"
                             label2="PÓS-COVID"
                             onPress={() =>
-                                router.push("/Screens/InfoCovidScreen")  
+                                router.push("/Screens/GuiaScreen")  
                             }
                         />
                         <HomeSelect
@@ -145,7 +145,7 @@ const HomeScreen: React.FC = () => {
                             label="SUPORTE"
                             label2="PSICOLÓGICO"
                             onPress={() =>
-                                router.push("/Screens/InfoCovidScreen")  
+                                router.push("/Screens/SuportePsiScreen")  
                             }
                         />
                     </View>
@@ -156,7 +156,7 @@ const HomeScreen: React.FC = () => {
                             label="PERGUNTAS"
                             label2="FREQUENTES"
                             onPress={() =>
-                                router.push("/Screens/InfoCovidScreen")  
+                                router.push("/Screens/Perguntas")  
                             }
                         />
                         <HomeSelect
@@ -164,15 +164,23 @@ const HomeScreen: React.FC = () => {
                             label="DEPOIMENTOS"
                             label2=" "
                             onPress={() =>
-                                router.push("/Screens/InfoCovidScreen")  
+                                router.push("/Screens/Depoimentos")  
                             }
                         />
                         <HomeSelect
                             imageSource={require("../../assets/images/contato.png")}
-                            label="CONTATOS"
+                            label="FISIO IA"
                             label2=" "
                             onPress={() =>
-                                router.push("/Screens/TiraDuvidasIA")  
+                                router.push("/Screens/ArtigosScreen")  
+                            }
+                        />
+                        <HomeSelect
+                            imageSource={require("../../assets/images/contato.png")}
+                            label="ARTIGOS"
+                            label2=" "
+                            onPress={() =>
+                                router.push("/Screens/ArtigosScreen")  
                             }
                         />
                     </View>

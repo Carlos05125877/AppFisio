@@ -32,7 +32,7 @@ const HomeScreen: React.FC = () => {
 
 	return (
         <GestureHandlerRootView style={styles.container}>
-            <Header/>
+            <Header title="REABILITAÇÃO FISIOTERAPÊUTICA"/>
             <PanGestureHandler
                 onGestureEvent={onGestureEvent}
                 onHandlerStateChange={onHandlerStateChange}
@@ -46,10 +46,7 @@ const HomeScreen: React.FC = () => {
 
 
                     <View style={styles.content}>
-                        <View style={{ width: 500 }}>
-                            <Text style={styles.titulo}>REABILITAÇÃO FISIOTERAPÊUTICA</Text>
-                            <View style={styles.line}></View>
-                        </View>
+                        
 
                         <View style={styles.areaDeSelecao}>
                             <View style={styles.primeiraLinha}>
@@ -84,7 +81,7 @@ const HomeScreen: React.FC = () => {
                             <ReabilitacaoSelect
                                     imageSource={require("../../assets/images/reabilitacaoMusculo.png")}
                                     label="REABILITAÇÃO"
-                                    label2="MUSCULOESQUELÉTICA"
+                                    label2="FUNCIONAL"
                                     onPress={() =>
                                         router.push("/Screens/InfoCovidScreen")  
                                     }
@@ -97,41 +94,8 @@ const HomeScreen: React.FC = () => {
                                         router.push("/Screens/InfoCovidScreen")  
                                     }
                                 />
-                                <ReabilitacaoSelect
-                                    imageSource={require("../../assets/images/fadigaPos.png")}
-                                    label="MANEJO DA"
-                                    label2="FADIGA PÓS-COVID"
-                                    onPress={() =>
-                                        router.push("/Screens/InfoCovidScreen")  
-                                    }
-                                />
                             </View>
-                            <View style={styles.terceiraLinha}>
-                            <ReabilitacaoSelect
-                                    imageSource={require("../../assets/images/educacaoAutocuidado.png")}
-                                    label="EDUCAÇÃO E"
-                                    label2="AUTOCUIDADO"
-                                    onPress={() =>
-                                        router.push("/Screens/InfoCovidScreen")  
-                                    }
-                                />
-                                <ReabilitacaoSelect
-                                    imageSource={require("../../assets/images/telereabilitacao.png")}
-                                    label="TELEREABILITAÇÃO"
-                                    label2=" "
-                                    onPress={() =>
-                                        router.push("/Screens/InfoCovidScreen")  
-                                    }
-                                />
-                                <ReabilitacaoSelect
-                                    imageSource={require("../../assets/images/monitoramento.png")}
-                                    label="MONITORAMENTO E"
-                                    label2="PROGRESSÃO"
-                                    onPress={() =>
-                                        router.push("/Screens/InfoCovidScreen")  
-                                    }
-                                />
-                            </View>
+                            
                         </View> 
                             <View style={styles.btStyle}>
                                 <BtPerguntasFrequentes onPress={() =>
@@ -149,6 +113,7 @@ const HomeScreen: React.FC = () => {
 const styles = StyleSheet.create({
 
     container: {
+        marginTop: 20,
         flex: 1,
         display: "flex",
         justifyContent: "flex-start",
@@ -163,6 +128,7 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        justifyContent: "center",
       },
 
     titulo: {
@@ -174,10 +140,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         fontWeight: 600,
         lineHeight: 20,
-    },
-    line:{
-        height: 1,
-        backgroundColor: "#5B5B5B80",
     },
     areaDeSelecao: {
         display: "flex",

@@ -12,6 +12,7 @@ import Header from "@/components/Header";
 
 const CadastroScreen: React.FC = () => {
     const router = useRouter();
+    const [nome, setNome] = useState<string>(""); // Novo campo nome
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -41,7 +42,7 @@ const CadastroScreen: React.FC = () => {
 
     // Função para registro com email/senha e salvamento no Firestore
     const handleRegister = async (): Promise<void> => {
-        if (!email || !password || !confirmPassword) {
+        if (!nome || !email || !password || !confirmPassword) {
             Alert.alert('Erro', 'Por favor, preencha todos os campos');
             return;
         }
@@ -59,6 +60,7 @@ const CadastroScreen: React.FC = () => {
             
             // Salvar dados do usuário no Firestore
             await setDoc(doc(db, "users", user.uid), {
+                nome: nome,
                 email: user.email,
                 uid: user.uid,
                 createdAt: new Date().toISOString(),
@@ -89,7 +91,7 @@ const CadastroScreen: React.FC = () => {
 
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
-            <Header />
+            <Header title="REALIZAR CADASTRO"/>
             <PanGestureHandler
                 onGestureEvent={onGestureEvent}
                 onHandlerStateChange={onHandlerStateChange}
@@ -100,6 +102,16 @@ const CadastroScreen: React.FC = () => {
                             <Text style={styles.title}>Crie sua conta</Text>
                         </View>
                         <View style={styles.inputContainer}>
+
+                            <InputField
+                                label=" Nome"
+                                inputType="nome"
+                                secureTextEntry={false}
+                                value={nome}
+                                onChangeText={setNome}
+                            />
+
+
                             <InputField
                                 label="Email"
                                 inputType="email"

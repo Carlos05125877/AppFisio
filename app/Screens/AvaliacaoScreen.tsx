@@ -7,16 +7,13 @@ import {
   ScrollView,
   StyleSheet,
 } from 'react-native';
-
+import Header from "@/components/Header";
 const AvaliacaoScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
+      <Header title="AVALIAÇÃO FISIOTERAPÊUTICA"/>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={styles.containerPrincipal}>
-          <Text style={styles.titulo}>
-            REABILITAÇÃO FISIOTERAPÊUTICA
-          </Text>
-          <View style={styles.divisor} />
           <Text style={styles.citacao}>
             “O primeiro passo para cuidar de você é entender como você está.”
           </Text>
