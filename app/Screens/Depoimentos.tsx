@@ -22,7 +22,8 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Header from '@/components/Header';
-import { auth } from '../firebase/config';
+import { auth, db } from '../firebase/config';
+import { doc, getDoc } from 'firebase/firestore';
 
 const depoimentosIniciais = [
   {
@@ -54,10 +55,20 @@ export default function DepoimentosScreen(): React.JSX.Element {
   const [nome, setNome] = useState('');
 
   useEffect(() => {
-    const usuario = auth.currentUser;
-    if (usuario) {
-      setNome(usuario.displayName || usuario.email || '');
-    }
+    const fetchUserName = async () => {
+      const usuario = auth.currentUser;
+      if (usuario) {
+        const userDocRef = doc(db, 'users', usuario.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        if (userDocSnap.exists()) {
+          const userData = userDocSnap.data();
+          setNome(userData.nome || usuario.displayName || '');
+        } else {
+          setNome(usuario.displayName || '');
+        }
+      }
+    };
+    fetchUserName();
   }, []);
 
   const panResponder = useRef(
@@ -93,21 +104,20 @@ export default function DepoimentosScreen(): React.JSX.Element {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <Header title='DEPOIMENTOS'/>
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={0}
-      >
-        <ScrollView
-          scrollEnabled={true}
-          contentInsetAdjustmentBehavior="automatic"
-          keyboardShouldPersistTaps="handled"
+      <View style={{ flex: 1 }} {...panResponder.panHandlers}>
+        <KeyboardAvoidingView
           style={{ flex: 1 }}
-          contentContainerStyle={{ flexGrow: 1, justifyContent: 'flex-start' }}
-          {...panResponder.panHandlers}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          keyboardVerticalOffset={0}
         >
-          <View style={styles.container}>
-            <View style={styles.content}>
+          <ScrollView
+            scrollEnabled={true}
+            contentInsetAdjustmentBehavior="automatic"
+            keyboardShouldPersistTaps="handled"
+            style={{ flex: 1 }}
+            contentContainerStyle={{ flexGrow: 1, justifyContent: 'flex-start' }}
+          >
+            <View style={styles.contentWrapper}>
               <View style={styles.comentarioArea}>
                 <View style={styles.comentarioBox}>
                   <Text style={styles.comentarioLabel} numberOfLines={1}>
@@ -147,9 +157,9 @@ export default function DepoimentosScreen(): React.JSX.Element {
                 ))}
               </View>
             </View>
-          </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </View>
     </SafeAreaView>
   );
 }
@@ -160,8 +170,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     position: 'relative',
     overflow: 'hidden',
+  },
+  contentWrapper: {
+    width: '95%',
+    maxWidth: 420,
+    alignSelf: 'center',
+    gap: 32,
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    position: 'relative',
+    marginTop: 0,
+    marginBottom: 0,
     paddingBottom: 24,
   },
   header: {
@@ -196,16 +214,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     overflow: 'hidden',
     zIndex: 19,
-  },
-  content: {
-    width: '95%',
-    maxWidth: 420,
-    alignSelf: 'center',
-    gap: 32,
-    alignItems: 'center',
-    position: 'relative',
-    marginTop: 0,
-    marginBottom: 0,
   },
   titleContainer: {
     gap: 18,

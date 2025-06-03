@@ -456,30 +456,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     paddingBottom: 24,
   },
-  titleContainer: {
-    gap: 10,
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    position: 'relative',
-    marginTop: 16,
-    marginBottom: 8,
-  },
-  title: {
-    fontFamily: 'Alumni Sans SC',
-    fontSize: 22,
-    fontWeight: '700',
-    lineHeight: 28,
-    color: '#5b5b5b',
-    textAlign: 'center',
-    marginBottom: 2,
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-  },
-  divider: {
-    height: 1,
-    backgroundColor: '#E0E0E0',
-    width: '100%',
-  },
+
   cardsArea: {
     display: 'flex',
     flexDirection: 'column',

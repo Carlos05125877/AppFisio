@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, StyleSheet, Alert, Animated } from "react-native";
+import { View, Text, StyleSheet, Alert, Animated, ScrollView } from "react-native";
 import InputField from "../../components/InputField";
 import { useRouter } from "expo-router";
 import Button from "@/components/Button";
@@ -92,52 +92,59 @@ const CadastroScreen: React.FC = () => {
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
             <Header title="REALIZAR CADASTRO"/>
+            
+
+            
             <PanGestureHandler
                 onGestureEvent={onGestureEvent}
                 onHandlerStateChange={onHandlerStateChange}
+                activeOffsetX={[-10, 10]}
             >
                 <Animated.View style={[styles.container, { transform: [{ translateX }] }]}>
                     <View style={styles.content}>
-                        <View>
-                            <Text style={styles.title}>Crie sua conta</Text>
-                        </View>
-                        <View style={styles.inputContainer}>
+                        <ScrollView  contentInsetAdjustmentBehavior="automatic">
+                            <View>
+                                <Text style={styles.title}>Crie sua conta</Text>
+                            </View>
+                            <View style={styles.inputContainer}>
 
-                            <InputField
-                                label=" Nome"
-                                inputType="nome"
-                                secureTextEntry={false}
-                                value={nome}
-                                onChangeText={setNome}
-                            />
+                                <InputField
+                                    label=" Nome"
+                                    inputType="nome"
+                                    secureTextEntry={false}
+                                    value={nome}
+                                    onChangeText={setNome}
+                                />
 
 
-                            <InputField
-                                label="Email"
-                                inputType="email"
-                                secureTextEntry={false}
-                                value={email}
-                                onChangeText={setEmail}
-                            />
-                            <InputField
-                                label="Senha"
-                                inputType="password"
-                                secureTextEntry={true}
-                                value={password}
-                                onChangeText={setPassword}
-                            />
-                            <InputField
-                                label="Confirmar Senha"
-                                inputType="password"
-                                secureTextEntry={true}
-                                value={confirmPassword}
-                                onChangeText={setConfirmPassword}
-                            />
-                        </View>
-                        <Button onPress={handleRegister} titulo={loading ? "Carregando..." : "Cadastrar"} />
+                                <InputField
+                                    label="Email"
+                                    inputType="email"
+                                    secureTextEntry={false}
+                                    value={email}
+                                    onChangeText={setEmail}
+                                />
+                                <InputField
+                                    label="Senha"
+                                    inputType="password"
+                                    secureTextEntry={true}
+                                    value={password}
+                                    onChangeText={setPassword}
+                                />
+                                <InputField
+                                    label="Confirmar Senha"
+                                    inputType="password"
+                                    secureTextEntry={true}
+                                    value={confirmPassword}
+                                    onChangeText={setConfirmPassword}
+                                />
+                            </View>
+                            <Button onPress={handleRegister} titulo={loading ? "Carregando..." : "Cadastrar"} />
+                        </ScrollView>
                     </View>
                 </Animated.View>
             </PanGestureHandler>
+            
         </GestureHandlerRootView>
     );
 };

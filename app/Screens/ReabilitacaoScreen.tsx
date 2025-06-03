@@ -5,6 +5,7 @@ import { GestureHandlerRootView, PanGestureHandler } from 'react-native-gesture-
 import ReabilitacaoSelect from "@/components/ReabilitacaoSelect";
 import Header from "@/components/Header";
 import BtPerguntasFrequentes from "@/components/btPerguntasFrequentes"; 
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const HomeScreen: React.FC = () => {
     const router = useRouter();
@@ -31,8 +32,11 @@ const HomeScreen: React.FC = () => {
     };
 
 	return (
-        <GestureHandlerRootView style={styles.container}>
-            <Header title="REABILITAÇÃO FISIOTERAPÊUTICA"/>
+            
+        
+            <GestureHandlerRootView style={styles.container}>
+             <Header title="REABILITAÇÃO FISIOTERAPÊUTICA"/>
+            
             <PanGestureHandler
                 onGestureEvent={onGestureEvent}
                 onHandlerStateChange={onHandlerStateChange}
@@ -99,10 +103,11 @@ const HomeScreen: React.FC = () => {
                         </View> 
                             <View style={styles.btStyle}>
                                 <BtPerguntasFrequentes onPress={() =>
-                                        router.push("/Screens/InfoCovidScreen")  
+                                        router.push("/Screens/Perguntas")  
                                     }
                                 />
                             </View>
+                            
                     </View>
                 </Animated.View>
             </PanGestureHandler>
@@ -113,18 +118,16 @@ const HomeScreen: React.FC = () => {
 const styles = StyleSheet.create({
 
     container: {
-        marginTop: 20,
+
         flex: 1,
         display: "flex",
         justifyContent: "flex-start",
         flexDirection: "column",
         alignItems: "center",
         backgroundColor: "#ffffff",
-        height: "100%",
-        width: "100%",
+        
     },
     content: {
-        marginTop: 20,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
