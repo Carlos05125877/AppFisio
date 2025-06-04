@@ -121,7 +121,7 @@ const HomeScreen: React.FC = () => {
                             label="COVID-19"
                             label2=" "
                             onPress={() =>
-                                router.push("/Screens/InfoCovidScreen")  
+                                router.push("/Screens/FisioIa")  
                             }
                         />
                         <HomeSelect
@@ -168,15 +168,16 @@ const HomeScreen: React.FC = () => {
                             }
                         />
                         <HomeSelect
-                            imageSource={require("../../assets/images/contato.png")}
+                            imageSource={require("../../assets/images/fisioIA.png")}
                             label="FISIO IA"
                             label2=" "
                             onPress={() =>
-                                router.push("/Screens/ArtigosScreen")  
+                                router.push("/Screens/FisioIa")  
                             }
                         />
                         <HomeSelect
-                            imageSource={require("../../assets/images/contato.png")}
+                            imageSource={require("../../assets/images/artigos.png")}
+                            style={{ width: 70, height: 70 }}
                             label="ARTIGOS"
                             label2=" "
                             onPress={() =>

@@ -78,7 +78,7 @@ const artigos = [
 
 const ArtigosScreen = (): React.JSX.Element => {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+    <View> 
       <Header title="ARTIGOS"/>
       <ScrollView
         scrollEnabled={true}
@@ -109,7 +109,7 @@ const ArtigosScreen = (): React.JSX.Element => {
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#e0e0e0',
   },
   articlesArea: {
-    width: '100%',
+    width: '90%',
     maxWidth: 420,
     gap: 12,
     alignItems: 'center',
@@ -207,8 +207,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   articleImageArea: {
-    width: 80,
-    height: 80,
+    width: 100,
+    height: 120,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
@@ -216,8 +216,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
   },
   articleImage: {
-    width: 80,
-    height: 80,
+    width: "100%",
+    height: "100%",
     borderRadius: 10,
   },
 });

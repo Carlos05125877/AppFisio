@@ -10,6 +10,7 @@ import {
   Modal,
   Pressable,
 } from 'react-native';
+import Header from '@/components/Header';
 
 interface GuiaScreenProps {}
 
@@ -85,22 +86,11 @@ const SuportePsiScreen: React.FC<GuiaScreenProps> = () => {
   const currentInfo = informativos.find((i) => i.key === modal);
 
   return (
-    <SafeAreaView>
+    <View>
+      <Header title="SUPORTE PSICOLÓGICO" />
       <ScrollView scrollEnabled contentInsetAdjustmentBehavior="automatic">
         <View style={styles.container}>
-          <View style={styles.header}>
-            
-          </View>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title} numberOfLines={1}>
-              suporte psicológico
-            </Text>
-            <ImageBackground
-    style={styles.divider}
-    source={{ uri: 'https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-31/rHyDbW90Qn.png' }}
-    resizeMode="cover"
-  />
-          </View>
+          
           <View style={styles.brainContainer}>
             {/* Botões das áreas do cérebro */}
             {informativos.map((info) => (
@@ -160,7 +150,7 @@ const SuportePsiScreen: React.FC<GuiaScreenProps> = () => {
           </View>
         </Modal>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -174,20 +164,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     paddingBottom: 24,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
-    height: 44,
-    paddingTop: 19,
-    paddingRight: 17,
-    paddingBottom: 19,
-    paddingLeft: 17,
-    backgroundColor: '#ffffff',
-    position: 'relative',
-    zIndex: 17,
-    marginTop: 16,
+    height: '100%',
   },
   headerIcon: {
     width: 32,

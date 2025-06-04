@@ -45,7 +45,7 @@ const infoCovidScreen: React.FC = () => {
 
     return (
         <GestureHandlerRootView style={styles.containerPrincipal}>
-            <Header />
+            <Header title="COVID-19"/>
             <View style={styles.container}>
                 <View style={styles.conteudo}>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.rolagem}>
@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     rolagem: {
+        paddingTop:5,
         display: "flex",
     },
     Container: {

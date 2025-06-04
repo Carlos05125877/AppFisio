@@ -7,6 +7,7 @@ interface HomeSelectProps {
   label: string;
   label2 : string;
   fontFamily?: string;
+  style?: any;
   onPress?: () => void;
 }
 

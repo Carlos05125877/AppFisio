@@ -80,7 +80,7 @@ const GuiaScreen = (): React.JSX.Element => {
   const [aberta, setAberta] = useState<number | null>(null);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+    <View> 
       <Header title="GUIA PÓS-COVID" />
       <ScrollView
         scrollEnabled={true}
@@ -443,7 +443,7 @@ const GuiaScreen = (): React.JSX.Element => {
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
