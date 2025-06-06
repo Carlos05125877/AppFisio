@@ -1,15 +1,7 @@
-/**
- * Codia React Native App
- * https://codia.ai
- * https://github.com/facebook/react-native
- *
- * @format
- */
 import React, { useRef, useState, useEffect } from 'react';
 import {
   View,
   Text,
-  ImageBackground,
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
@@ -23,57 +15,65 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import Header from '@/components/Header';
 import { auth, db } from '../firebase/config';
-import { doc, getDoc } from 'firebase/firestore';
-
-const depoimentosIniciais = [
-  {
-    nome: 'Marcelo',
-    texto:
-      '“O aplicativo é uma ferramenta essencial para ampliar o conhecimento da população e empoderar pacientes. Com linguagem acessível e conteúdo baseado em evidências, ele promove a conscientização sobre sintomas persistentes e orienta sobre práticas fisioterapêuticas que auxiliam na reabilitação respiratória, funcional e emocional. Uma iniciativa valiosa que une tecnologia, saúde e informação de forma prática e humanizada.”',
-  },
-  {
-    nome: 'Joaquim',
-    texto:
-      'Aplicativo bem estruturado, com informações claras e confiáveis sobre a Covid Longa. Destaca com excelência a importância da fisioterapia na recuperação, oferecendo suporte educativo e acessível para pacientes e profissionais.',
-  },
-  {
-    nome: 'João',
-    texto:
-      'Aplicativo intuitivo e educativo, que esclarece de forma eficaz os desafios da Covid Longa e mostra como a fisioterapia pode transformar a jornada de recuperação.',
-  },
-  {
-    nome: 'Maria',
-    texto:
-      'Uma plataforma informativa e atualizada, que valoriza o cuidado contínuo e orienta com precisão sobre o papel da fisioterapia no restabelecimento da saúde pós-Covid.',
-  },
-];
+import { doc, getDoc, collection, addDoc, getDocs, orderBy, query } from 'firebase/firestore';
 
 export default function DepoimentosScreen(): React.JSX.Element {
   const navigation = useNavigation();
-  const [depoimentos, setDepoimentos] = useState(depoimentosIniciais);
+  const [depoimentos, setDepoimentos] = useState<any[]>([]);
   const [novoComentario, setNovoComentario] = useState('');
-  const [nome, setNome] = useState('');
+  const [nomeUsuario, setNomeUsuario] = useState('');
+  const [loading, setLoading] = useState(true);
 
+  // Busca nome do usuário
   useEffect(() => {
     const fetchUserName = async () => {
-      const usuario = auth.currentUser;
-      if (usuario) {
-        const userDocRef = doc(db, 'users', usuario.uid);
-        const userDocSnap = await getDoc(userDocRef);
-        if (userDocSnap.exists()) {
-          const userData = userDocSnap.data();
-          setNome(userData.nome || usuario.displayName || '');
+      try {
+        const usuario = auth.currentUser;
+        if (usuario) {
+          const userDocRef = doc(db, 'users', usuario.uid);
+          const userDocSnap = await getDoc(userDocRef);
+          if (userDocSnap.exists()) {
+            const userData = userDocSnap.data();
+            const nome = userData.nome || userData.name || usuario.displayName || 'Usuário';
+            setNomeUsuario(nome);
+          } else {
+            setNomeUsuario(usuario.displayName || 'Usuário');
+          }
         } else {
-          setNome(usuario.displayName || '');
+          setNomeUsuario('Usuário Anônimo');
         }
+      } catch (error) {
+        setNomeUsuario('Usuário');
       }
     };
     fetchUserName();
   }, []);
 
+  // Busca depoimentos do Firestore
+  useEffect(() => {
+    const fetchDepoimentos = async () => {
+      try {
+        const depoimentosRef = collection(db, 'depoimentos');
+        const depoimentosQuery = query(depoimentosRef, orderBy('criadoEm', 'desc'));
+        const querySnapshot = await getDocs(depoimentosQuery);
+        const lista: any[] = [];
+        querySnapshot.forEach((doc) => {
+          lista.push(doc.data());
+        });
+        setDepoimentos(lista);
+      } catch (error) {
+        console.error('Erro ao buscar depoimentos:', error);
+        Alert.alert('Erro', 'Não foi possível carregar os depoimentos. Tente novamente mais tarde.');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDepoimentos();
+  }, []);
+
   const panResponder = useRef(
     PanResponder.create({
-      onStartShouldSetPanResponder: (_, gestureState) => true,
+      onStartShouldSetPanResponder: () => true,
       onMoveShouldSetPanResponder: (_, gestureState) => gestureState.x0 < 40,
       onPanResponderMove: () => {},
       onPanResponderRelease: (_, gestureState) => {
@@ -84,25 +84,44 @@ export default function DepoimentosScreen(): React.JSX.Element {
     })
   ).current;
 
-  const handleEnviar = () => {
-    if (!novoComentario.trim() || !nome.trim()) {
-      Alert.alert('Preencha seu nome e comentário!');
+  // Envia depoimento para o Firestore
+  const handleEnviar = async () => {
+    if (!novoComentario.trim()) {
+      Alert.alert('Atenção', 'Por favor, digite seu comentário!');
       return;
     }
-    setDepoimentos([
-      {
-        nome: nome.trim(),
-        texto: novoComentario.trim(),
-      },
-      ...depoimentos,
-    ]);
-    setNovoComentario('');
-    setNome('');
-    Alert.alert('Comentário enviado!', 'Seu feedback foi registrado.');
+    if (!nomeUsuario.trim()) {
+      Alert.alert('Erro', 'Nome do usuário não foi carregado. Tente novamente.');
+      return;
+    }
+    const novoDepoimento = {
+      nome: nomeUsuario,
+      texto: novoComentario.trim(),
+      criadoEm: new Date(),
+    };
+    try {
+      await addDoc(collection(db, 'depoimentos'), novoDepoimento);
+      setDepoimentos([novoDepoimento, ...depoimentos]);
+      setNovoComentario('');
+      Alert.alert('Sucesso!', 'Seu comentário foi enviado com sucesso.');
+    } catch (error) {
+      Alert.alert('Erro', 'Não foi possível salvar seu comentário. Tente novamente.');
+    }
   };
 
+  if (loading) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <Header title='DEPOIMENTOS'/>
+        <View style={styles.loadingContainer}>
+          <Text style={styles.loadingText}>Carregando...</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+    <SafeAreaView style={styles.container}>
       <Header title='DEPOIMENTOS'/>
       <View style={{ flex: 1 }} {...panResponder.panHandlers}>
         <KeyboardAvoidingView
@@ -120,11 +139,11 @@ export default function DepoimentosScreen(): React.JSX.Element {
             <View style={styles.contentWrapper}>
               <View style={styles.comentarioArea}>
                 <View style={styles.comentarioBox}>
-                  <Text style={styles.comentarioLabel} numberOfLines={1}>
-                    Deixe seu comentário!!
+                  <Text style={styles.comentarioLabel}>
+                    Olá, {nomeUsuario}! Deixe seu comentário:
                   </Text>
                   <TextInput
-                    style={[styles.input, { minHeight: 40, maxHeight: 80 }]}
+                    style={styles.input}
                     placeholder="Digite seu feedback..."
                     placeholderTextColor="#888"
                     value={novoComentario}
@@ -132,22 +151,27 @@ export default function DepoimentosScreen(): React.JSX.Element {
                     multiline
                     maxLength={300}
                   />
-                  <TouchableOpacity
-                    style={[
-                      styles.enviarButton,
-                      { opacity: novoComentario.trim() && nome.trim() ? 1 : 0.5 },
-                    ]}
-                    onPress={handleEnviar}
-                    disabled={!novoComentario.trim() || !nome.trim()}
-                  >
-                    <Text style={styles.enviarButtonText}>Enviar</Text>
-                  </TouchableOpacity>
+                  <View style={styles.buttonContainer}>
+                    <Text style={styles.caractereCount}>
+                      {novoComentario.length}/300
+                    </Text>
+                    <TouchableOpacity
+                      style={[
+                        styles.enviarButton,
+                        { opacity: novoComentario.trim() ? 1 : 0.5 },
+                      ]}
+                      onPress={handleEnviar}
+                      disabled={!novoComentario.trim()}
+                    >
+                      <Text style={styles.enviarButtonText}>Enviar</Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
               <View style={styles.depoimentosContainer}>
                 {depoimentos.map((item, idx) => (
                   <View key={idx} style={styles.depoimentoBox}>
-                    <Text style={styles.depoimentoNome} numberOfLines={1}>
+                    <Text style={styles.depoimentoNome}>
                       {item.nome}
                     </Text>
                     <Text style={styles.depoimentoTexto}>
@@ -166,97 +190,114 @@ export default function DepoimentosScreen(): React.JSX.Element {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    flex: 1,
     backgroundColor: '#ffffff',
-    position: 'relative',
-    overflow: 'hidden',
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    fontSize: 16,
+    color: '#666',
   },
   contentWrapper: {
     width: '95%',
     maxWidth: 420,
     alignSelf: 'center',
-    gap: 32,
+    gap: 24,
     alignItems: 'center',
-    position: 'relative',
-    marginTop: 0,
-    marginBottom: 0,
-    paddingBottom: 24,
+    paddingVertical: 16,
+    paddingBottom: 32,
   },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  comentarioArea: {
     width: '100%',
-    height: 44,
-    paddingTop: 19,
-    paddingRight: 17,
-    paddingBottom: 19,
-    paddingLeft: 17,
     backgroundColor: '#ffffff',
-    position: 'relative',
-    zIndex: 18,
-    marginTop: 16,
   },
-  backButton: {
-    width: 32,
-    height: 32,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 8,
-  },
-  backButtonText: {
-    fontSize: 24,
-    color: '#222',
-    fontWeight: 'bold',
-  },
-  headerIcon: {
-    width: 32,
-    height: 32,
-    position: 'relative',
-    overflow: 'hidden',
-    zIndex: 19,
-  },
-  titleContainer: {
-    gap: 18,
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    position: 'relative',
-    marginTop: 16,
-    marginBottom: 8,
-  },
-  title: {
-    fontFamily: 'Alumni Sans SC',
-    fontSize: 24,
-    fontWeight: '600',
-    lineHeight: 28,
-    color: '#5b5b5b',
-    textAlign: 'center',
-    marginBottom: 2,
-  },
-  divider: {
+  comentarioBox: {
     width: '100%',
-    height: 1,
-    alignSelf: 'stretch',
-    backgroundColor: '#e0e0e0',
+    gap: 12,
+    alignItems: 'flex-start',
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  comentarioLabel: {
+    fontFamily: 'Inter',
+    fontSize: 16,
+    fontWeight: '500',
+    lineHeight: 24,
+    color: '#333333',
+    textAlign: 'left',
+  },
+  input: {
+    minHeight: 80,
+    maxHeight: 120,
+    width: '100%',
+    borderColor: '#d0d0d0',
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 12,
+    fontFamily: 'Inter',
+    fontSize: 14,
+    color: '#333',
+    backgroundColor: '#fafafa',
+    textAlignVertical: 'top',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+  },
+  caractereCount: {
+    fontSize: 12,
+    color: '#888',
+    fontFamily: 'Inter',
+  },
+  enviarButton: {
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    backgroundColor: '#012a78',
+    borderRadius: 8,
+  },
+  enviarButtonText: {
+    fontFamily: 'Inter',
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#ffffff',
+    textAlign: 'center',
   },
   depoimentosContainer: {
     width: '100%',
-    minHeight: 200,
-    gap: 10,
+    gap: 12,
     alignItems: 'flex-start',
-    marginBottom: 20,
+  },
+  sectionTitle: {
+    fontFamily: 'Inter',
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#333333',
+    marginBottom: 8,
+    alignSelf: 'flex-start',
   },
   depoimentoBox: {
-    minHeight: 60,
-    paddingVertical: 8,
-    paddingHorizontal: 18,
-    gap: 5,
-    alignItems: 'flex-start',
     width: '100%',
-    borderRadius: 16,
-    borderWidth: 1.5,
-    borderColor: '#000000',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    gap: 8,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
     backgroundColor: '#fff',
-    marginBottom: 8,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
@@ -264,81 +305,18 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   depoimentoNome: {
-    fontFamily: 'Quicksand',
-    fontSize: 15,
+    fontFamily: 'Inter',
+    fontSize: 14,
     fontWeight: '600',
-    lineHeight: 20,
-    color: '#000000',
+    color: '#012a78',
     textAlign: 'left',
   },
   depoimentoTexto: {
-    fontFamily: 'Quicksand',
-    fontSize: 12,
-    fontWeight: '300',
-    lineHeight: 18,
-    color: '#000000',
-    textAlign: 'left',
-  },
-  comentarioArea: {
-    width: '100%',
-    backgroundColor: '#ffffff',
-    paddingBottom: 10,
-    paddingTop: 10,
-  },
-  comentarioBox: {
-    width: '100%',
-    maxWidth: 420,
-    gap: 13,
-    alignItems: 'flex-start',
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#ececec',
-    elevation: 2,
-    alignSelf: 'center',
-  },
-  comentarioLabel: {
     fontFamily: 'Inter',
-    fontSize: 16,
+    fontSize: 13,
     fontWeight: '400',
-    lineHeight: 24,
-    color: '#5e5e66',
-    textAlign: 'left',
-    marginBottom: 6,
-  },
-  input: {
-    minHeight: 36,
-    maxHeight: 80,
-    width: '100%',
-    borderColor: '#27272a',
-    borderWidth: 1,
-    borderRadius: 6,
-    padding: 8,
-    fontFamily: 'Inter',
-    fontSize: 15,
-    color: '#222',
-    backgroundColor: '#f7f7f7',
-    marginBottom: 8,
-  },
-  enviarButton: {
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'flex-end',
-    backgroundColor: '#012a78',
-    borderRadius: 8,
-    position: 'relative',
-    zIndex: 23,
-  },
-  enviarButtonText: {
-    fontFamily: 'Inter',
-    fontSize: 16,
-    fontWeight: '600',
-    lineHeight: 24,
-    color: '#ffffff',
+    lineHeight: 18,
+    color: '#444444',
     textAlign: 'left',
   },
 });

@@ -101,8 +101,9 @@ const CadastroScreen: React.FC = () => {
                 activeOffsetX={[-10, 10]}
             >
                 <Animated.View style={[styles.container, { transform: [{ translateX }] }]}>
-                    <View style={styles.content}>
-                        <ScrollView  contentInsetAdjustmentBehavior="automatic">
+                    <ScrollView  contentInsetAdjustmentBehavior="automatic">
+                        <View style={styles.content}>
+                            
                             <View>
                                 <Text style={styles.title}>Crie sua conta</Text>
                             </View>
@@ -140,8 +141,9 @@ const CadastroScreen: React.FC = () => {
                                 />
                             </View>
                             <Button onPress={handleRegister} titulo={loading ? "Carregando..." : "Cadastrar"} />
-                        </ScrollView>
-                    </View>
+                            
+                        </View>
+                    </ScrollView>
                 </Animated.View>
             </PanGestureHandler>
             
@@ -154,16 +156,21 @@ const styles = StyleSheet.create({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        paddingTop: 50,
-        paddingBottom: 10,
+        marginTop: "auto",
+        marginBottom: "auto",
         backgroundColor: "#ffffff",
         flex: 1,
+        width: 420,
+        padding: 20,
+        
     },
     content: {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         width: 302,
+        marginTop: "auto",
+        marginBottom: "auto",
     },
     title: {
         marginBottom: 25,
@@ -174,7 +181,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     inputContainer: {
-        width: "100%",
+        width: 300,
         display: "flex",
         flexDirection: "column",
         marginBottom: 25,

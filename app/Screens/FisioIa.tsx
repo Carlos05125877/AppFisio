@@ -9,7 +9,6 @@ const GEMINI_API_KEY = "AIzaSyC-N2m8jB0zVxB55mIrxuy0-hvKqA5Gi9s";
 const GEMINI_MODEL = "gemini-2.0-flash";
 const LOADING_DOTS_INTERVAL = 500; // ms
 const PLACEHOLDER_TEXT = "Qual a sua dúvida sobre a COVID?";
-const APP_TITLE = 'FISIO IA';
 
 // Cores
 const COLORS = {
@@ -89,7 +88,7 @@ const FisioIa = () => {
       // Prompt inicial para direcionar a IA a responder apenas perguntas relacionadas ao app
       const initialPrompt = {
         role: 'user',
-        parts: [{ text: "Você é um assistente virtual para um aplicativo de fisioterapia. Responda apenas a perguntas relacionadas a fisioterapia, saúde, exercícios, recuperação e funcionalidades do aplicativo. Se a pergunta não for sobre esses tópicos, peça ao usuário para reformular." }],
+        parts: [{ text: "Você é um assistente virtual para um aplicatico chamado Corona Fatos, se trata de um aplicativo desenvolvido por universitarios de Fisioterapia e Ciencia da Computação que bsuca informar alunos, professores, parentes e pessoas que sofrem com as sequelas da Covid-19, a chamada covid Longa. Responda apenas a perguntas relacionadas a fisioterapia, saúde, exercícios, recuperação e funcionalidades do aplicativo. Se a pergunta não for sobre esses tópicos, peça ao usuário para reformular." }],
       };
 
       // Mapeia o histórico da conversa para o formato de `contents` esperado pela API do Gemini

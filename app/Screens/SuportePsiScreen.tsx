@@ -112,8 +112,8 @@ const SuportePsiScreen: React.FC<GuiaScreenProps> = () => {
             ))}
             <ImageBackground
     style={styles.brainImage}
-    source={{ uri: 'https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-31/HO9ey40XW6.png' }}
-    resizeMode="cover"
+    source={require('../../assets/images/Cerebro.png')}
+    resizeMode="contain"
   />
           </View>
           <View style={styles.articlesContainer}>
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     paddingBottom: 24,
-    height: '100%',
+    height: 770,
   },
   headerIcon: {
     width: 32,
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#e0e0e0',
   },
   brainContainer: {
-    width: '95%',
+    width: '100%',
     maxWidth: 420,
     height: 413,
     paddingTop: 0,
@@ -213,7 +213,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     overflow: 'hidden',
     zIndex: 4,
-    marginTop: 32,
     marginLeft: 0,
     marginBottom: 0,
   },
@@ -237,13 +236,8 @@ const styles = StyleSheet.create({
     lineHeight: 14,
   },
   brainImage: {
-    width: '70%',
-    height: undefined,
+    width: '100%',
     aspectRatio: 266.622 / 172.863,
-    position: 'absolute',
-    top: 97,
-    left: '15%',
-    zIndex: 5,
   },
   articlesContainer: {
     width: '95%',

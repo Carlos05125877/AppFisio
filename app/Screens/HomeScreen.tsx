@@ -5,7 +5,6 @@ import { useRouter } from "expo-router";
 import Button from "@/components/Button";
 import DividerWithText from "../../components/DividerWithText";
 import GoogleButton from "../../components/GoogleButton";
-import AppleButton from "@/components/AppleButton";
 import HomeSelect from "@/components/HomeSelect";
 import { auth } from "../firebase/config";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
@@ -88,9 +87,10 @@ const HomeScreen: React.FC = () => {
                 </View>
                 <Button onPress={handleLogin} titulo={loading ? "Carregando..." : "Acessar"} />
 
-                <TouchableOpacity onPress={() => router.push('/Screens/InfoCovidScreen')}>
+                {/*<TouchableOpacity onPress={() => router.push('/Screens/InfoCovidScreen')}>
                     <Text style={styles.esqueciSenhaText}>Esqueci minha senha</Text>
-                </TouchableOpacity>    
+                </TouchableOpacity>*/}
+                <Text style={styles.esqueciSenhaText}>Esqueci minha senha</Text>
 
                 <TouchableOpacity onPress={() => router.push('/Screens/CadastrarScreen')}>
                     <Text style={styles.cadastrarText}>Cadastrar</Text>
@@ -121,7 +121,7 @@ const HomeScreen: React.FC = () => {
                             label="COVID-19"
                             label2=" "
                             onPress={() =>
-                                router.push("/Screens/FisioIa")  
+                                router.push("/Screens/InfoCovidScreen")  
                             }
                         />
                         <HomeSelect
@@ -177,7 +177,6 @@ const HomeScreen: React.FC = () => {
                         />
                         <HomeSelect
                             imageSource={require("../../assets/images/artigos.png")}
-                            style={{ width: 70, height: 70 }}
                             label="ARTIGOS"
                             label2=" "
                             onPress={() =>
