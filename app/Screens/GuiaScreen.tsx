@@ -88,7 +88,7 @@ const GuiaScreen = (): React.JSX.Element => {
       >
         <View style={styles.container}>
           <View style={styles.cardsArea}>
-            {/* Card 1 - Balão azul à esquerda */}
+            
             <View style={styles.cardBox}>
               <View style={[styles.cardRow, { flexDirection: 'row' }]}> 
                 <View style={[styles.cardBalloonLeft, { backgroundColor: '#021C4E' }]}>

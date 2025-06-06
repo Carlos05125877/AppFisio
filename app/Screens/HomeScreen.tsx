@@ -145,7 +145,7 @@ const HomeScreen: React.FC = () => {
                             label="SUPORTE"
                             label2="PSICOLÓGICO"
                             onPress={() =>
-                                router.push("/Screens/SuportePsiScreen")  
+                                router.push("/Screens/EmBreve" as any)
                             }
                         />
                     </View>

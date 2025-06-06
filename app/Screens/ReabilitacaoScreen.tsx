@@ -75,7 +75,7 @@ const HomeScreen: React.FC = () => {
                                     label="REABILITAÇÃO"
                                     label2="CARDIORESPIRATÓRIA"
                                     onPress={() =>
-                                        router.push("/Screens/ReabilitacaoCardio")  
+                                        router.push("/Screens/EmBreve" as any)   
                                     }
                                 />
                                 
@@ -87,7 +87,7 @@ const HomeScreen: React.FC = () => {
                                     label="REABILITAÇÃO"
                                     label2="FUNCIONAL"
                                     onPress={() =>
-                                        router.push("/Screens/ReabilitacaoFuncional")  
+                                        router.push("/Screens/EmBreve" as any)   
                                     }
                                 />
                                 <ReabilitacaoSelect
@@ -95,7 +95,7 @@ const HomeScreen: React.FC = () => {
                                     label="REABILITAÇÃO"
                                     label2="NEUROLÓGICA"
                                     onPress={() =>
-                                        router.push("/Screens/ReabilitacaoNeuro")  
+                                        router.push("/Screens/EmBreve" as any)  
                                     }
                                 />
                             </View>
