@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
   brainButton: {
     position: 'absolute',
     borderRadius: 8,
-    paddingVertical: 24,
+    paddingVertical: 8, // Reduced vertical padding
     paddingHorizontal: 10,
     minWidth: 85,
     maxWidth: 110,
