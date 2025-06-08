@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Image, Text, StyleSheet, TouchableOpacity, ScrollView, Alert } from "react-native";
+import { View, Image, Text, StyleSheet, TouchableOpacity, Alert, SafeAreaView } from "react-native";
 import InputField from "../../components/InputField";
 import { useRouter } from "expo-router";
 import Button from "@/components/Button";
@@ -96,107 +96,100 @@ const HomeScreen: React.FC = () => {
                     <Text style={styles.cadastrarText}>Cadastrar</Text>
                 </TouchableOpacity>
 
-                <DividerWithText
-                    text="Entrar com"
-                    styleContainer={{ with: "100%", marginBottom: 25 }}
-                    styleLine={{ backgroundColor: "#747373", height: 1, width: "25%" }}
-                    styleText={{ color: "#747373", fontSize: 15 }}
-                />
-                <View style={styles.entrarComContainer}>
-                    <GoogleButton />
-                </View>
+
             </>
         );
     };
 
     return (
-        <View style={styles.container}>
-            <View style={styles.content}>
-                {renderLoginContent()}
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#012B78" }}>
+            <View style={styles.container}>
+                <View style={styles.content}>
+                    {renderLoginContent()}
 
-                <View style={styles.areaDeSelecao}>
-                    <View style={styles.primeiraLinha}>
-                        <HomeSelect
-                            imageSource={require("../../assets/images/covidIcon.png")}
-                            label="COVID-19"
-                            label2=" "
-                            onPress={() =>
-                                router.push("/Screens/InfoCovidScreen")  
-                            }
-                        />
-                        <HomeSelect
-                            imageSource={require("../../assets/images/guiaPosCovid.png")}
-                            label="GUIA"
-                            label2="PÓS-COVID"
-                            onPress={() =>
-                                router.push("/Screens/GuiaScreen")  
-                            }
-                        />
-                        <HomeSelect
-                            imageSource={require("../../assets/images/reabilitacaoPosCovid.png")}
-                            label="REABILITAÇÃO"
-                            label2="PÓS-COVID"
-                            onPress={() =>
-                                router.push("/Screens/ReabilitacaoScreen")  
-                            }
-                        />
-                        <HomeSelect
-                            imageSource={require("../../assets/images/suportePsi.png")}
-                            label="SUPORTE"
-                            label2="PSICOLÓGICO"
-                            onPress={() =>
-                                router.push("/Screens/EmBreve" as any)
-                            }
-                        />
-                    </View>
+                    <View style={styles.areaDeSelecao}>
+                        <View style={styles.primeiraLinha}>
+                            <HomeSelect
+                                imageSource={require("../../assets/images/covidIcon.png")}
+                                label="COVID-19"
+                                label2=" "
+                                onPress={() =>
+                                    router.push("/Screens/InfoCovidScreen")  
+                                }
+                            />
+                            <HomeSelect
+                                imageSource={require("../../assets/images/guiaPosCovid.png")}
+                                label="GUIA"
+                                label2="PÓS-COVID"
+                                onPress={() =>
+                                    router.push("/Screens/GuiaScreen")  
+                                }
+                            />
+                            <HomeSelect
+                                imageSource={require("../../assets/images/reabilitacaoPosCovid.png")}
+                                label="REABILITAÇÃO"
+                                label2="PÓS-COVID"
+                                onPress={() =>
+                                    router.push("/Screens/ReabilitacaoScreen")  
+                                }
+                            />
+                            <HomeSelect
+                                imageSource={require("../../assets/images/suportePsi.png")}
+                                label="SUPORTE"
+                                label2="PSICOLÓGICO"
+                                onPress={() =>
+                                    router.push("/Screens/SuportePsiScreen")
+                                }
+                            />
+                        </View>
 
-                    <View style={styles.segundaLinha}>
-                        <HomeSelect
-                            imageSource={require("../../assets/images/perguntasFrequentes.png")}
-                            label="PERGUNTAS"
-                            label2="FREQUENTES"
-                            onPress={() =>
-                                router.push("/Screens/Perguntas")  
-                            }
-                        />
-                        <HomeSelect
-                            imageSource={require("../../assets/images/depoimentos.png")}
-                            label="DEPOIMENTOS"
-                            label2=" "
-                            onPress={() =>
-                                router.push("/Screens/Depoimentos")  
-                            }
-                        />
-                        <HomeSelect
-                            imageSource={require("../../assets/images/fisioIA.png")}
-                            label="FISIO IA"
-                            label2=" "
-                            onPress={() =>
-                                router.push("/Screens/FisioIa")  
-                            }
-                        />
-                        <HomeSelect
-                            imageSource={require("../../assets/images/artigos.png")}
-                            label="ARTIGOS"
-                            label2=" "
-                            onPress={() =>
-                                router.push("/Screens/ArtigosScreen")  
-                            }
-                        />
-                    </View>
-                </View> 
+                        <View style={styles.segundaLinha}>
+                            <HomeSelect
+                                imageSource={require("../../assets/images/perguntasFrequentes.png")}
+                                label="PERGUNTAS"
+                                label2="FREQUENTES"
+                                onPress={() =>
+                                    router.push("/Screens/Perguntas")  
+                                }
+                            />
+                            <HomeSelect
+                                imageSource={require("../../assets/images/depoimentos.png")}
+                                label="DEPOIMENTOS"
+                                label2=" "
+                                onPress={() =>
+                                    router.push("/Screens/Depoimentos")  
+                                }
+                            />
+                            <HomeSelect
+                                imageSource={require("../../assets/images/fisioIA.png")}
+                                label="FISIO IA"
+                                label2=" "
+                                onPress={() =>
+                                    router.push("/Screens/FisioIa")  
+                                }
+                            />
+                            <HomeSelect
+                                imageSource={require("../../assets/images/artigos.png")}
+                                label="ARTIGOS"
+                                label2=" "
+                                onPress={() =>
+                                    router.push("/Screens/ArtigosScreen")  
+                                }
+                            />
+                        </View>
+                    </View> 
+                </View>
             </View>
-        </View>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "flex-end",
         alignItems: "center",
-        paddingTop: 70,
-        paddingBottom: 10,
+        paddingTop: 150,
         backgroundColor: "#ffffff",
     },
     content: {
@@ -234,7 +227,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textAlign: "center",
         justifyContent: "center",
-        marginBottom: 25,
+        marginBottom: '8%',
     },
     entrarComContainer: {
         display: "flex",
@@ -249,11 +242,11 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "flex-start",
-        marginBottom: 20,
         width: "140%",
-        height: 380,
+        height: 300,
         flexShrink: 0,
-        borderRadius: "12%",
+        borderTopLeftRadius:"12%",
+        borderTopRightRadius:"12%",
         backgroundColor: "#012B78",
         paddingLeft: 11,
         paddingRight: 3,
@@ -280,7 +273,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 25,
         width: 300,
-        height: 468,
+        height: 400,
     },
     loggedInText: {
         color: "#333",

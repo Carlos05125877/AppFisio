@@ -4,7 +4,7 @@ import { useRouter } from "expo-router";
 import { GestureHandlerRootView, PanGestureHandler } from 'react-native-gesture-handler';
 import ReabilitacaoSelect from "@/components/ReabilitacaoSelect";
 import Header from "@/components/Header";
-import BtPerguntasFrequentes from "@/components/btPerguntasFrequentes"; 
+import BtPerguntasFrequentes from "@/components/btFisioIa"; 
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const HomeScreen: React.FC = () => {

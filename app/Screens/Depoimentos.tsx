@@ -71,18 +71,7 @@ export default function DepoimentosScreen(): React.JSX.Element {
     fetchDepoimentos();
   }, []);
 
-  const panResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onMoveShouldSetPanResponder: (_, gestureState) => gestureState.x0 < 40,
-      onPanResponderMove: () => {},
-      onPanResponderRelease: (_, gestureState) => {
-        if (gestureState.dx > 80 && gestureState.x0 < 40) {
-          navigation.goBack();
-        }
-      },
-    })
-  ).current;
+
 
   // Envia depoimento para o Firestore
   const handleEnviar = async () => {
@@ -123,7 +112,7 @@ export default function DepoimentosScreen(): React.JSX.Element {
   return (
     <SafeAreaView style={styles.container}>
       <Header title='DEPOIMENTOS'/>
-      <View style={{ flex: 1 }} {...panResponder.panHandlers}>
+      <View style={{ flex: 1 }} >
         <KeyboardAvoidingView
           style={{ flex: 1 }}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}

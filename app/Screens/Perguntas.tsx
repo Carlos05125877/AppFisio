@@ -198,20 +198,7 @@ const perguntasRespostas = [
 const Perguntas: React.FC = () => {
   const [abertas, setAbertas] = useState<number[]>([]);
   const navigation = useNavigation();
-  const panResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: (_, gestureState) => true,
-      onMoveShouldSetPanResponder: (_, gestureState) => {
-        return gestureState.x0 < 40;
-      },
-      onPanResponderMove: (_, gestureState) => {},
-      onPanResponderRelease: (_, gestureState) => {
-        if (gestureState.dx > 80 && gestureState.x0 < 40) {
-          navigation.goBack();
-        }
-      },
-    })
-  ).current;
+  
 
   const togglePergunta = (index: number) => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -223,8 +210,8 @@ const Perguntas: React.FC = () => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <Header title="PERGUNTAS FREQUENTES"/>
-      <ScrollView scrollEnabled contentInsetAdjustmentBehavior="automatic">
-        <View style={{ flex: 1 }} {...panResponder.panHandlers}>
+      <ScrollView scrollEnabled={true} contentInsetAdjustmentBehavior="automatic">
+        <View style={{ flex: 1 }} >
           <View style={styles.container}>
             <View style={styles.content}>
               <View style={styles.questionsContainer}>
