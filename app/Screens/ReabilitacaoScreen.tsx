@@ -75,7 +75,7 @@ const HomeScreen: React.FC = () => {
                                     label="REABILITAÇÃO"
                                     label2="CARDIORESPIRATÓRIA"
                                     onPress={() =>
-                                        router.push("/Screens/EmBreve" as any)   
+                                        router.push("/Screens/ReabilitacaoCardio")   
                                     }
                                 />
                                 
@@ -87,7 +87,7 @@ const HomeScreen: React.FC = () => {
                                     label="REABILITAÇÃO"
                                     label2="FUNCIONAL"
                                     onPress={() =>
-                                        router.push("/Screens/EmBreve" as any)   
+                                        router.push("/Screens/ReabilitacaoFuncional")   
                                     }
                                 />
                                 <ReabilitacaoSelect
@@ -95,7 +95,7 @@ const HomeScreen: React.FC = () => {
                                     label="REABILITAÇÃO"
                                     label2="NEUROLÓGICA"
                                     onPress={() =>
-                                        router.push("/Screens/EmBreve" as any)  
+                                        router.push("/Screens/ReabilitacaoNeuro")   
                                     }
                                 />
                             </View>
@@ -134,16 +134,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
       },
 
-    titulo: {
-        marginBottom: 25,
-        color: "#5B5B5B",
-        fontFamily: "Alumni Sans SC",
-        fontSize: 20,
-        textAlign: "center",
-        justifyContent: "center",
-        fontWeight: 600,
-        lineHeight: 20,
-    },
     areaDeSelecao: {
         display: "flex",
         flexDirection: "column",
